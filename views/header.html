@@ -58,7 +58,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="admin" class="logo">
+    <a href="/admin" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -172,7 +172,7 @@ desired effect
         <li class="header">In&iacutecio</li>
 
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="users"><i class="fa fa-user"></i> <span>Cadastrar Usuário</span></a></li>
+        <li class="active"><a href="/admin/users"><i class="fa fa-user"></i> <span>Cadastrar Usuário</span></a></li>
 
         <li class="active"><a href="#"><i class="fa fa-users"></i> <span>Cadastrar Aluno</span></a></li>
         
