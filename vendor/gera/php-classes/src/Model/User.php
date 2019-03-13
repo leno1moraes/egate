@@ -7,7 +7,44 @@ use \Geral\Model;
 
 class User extends Model {
 
+    const SUCCESS = "UserSuccess";
+    const ERROR = "UserError";
 
+    public static function setSuccess($msg){
+        $_SESSION[User::SUCCESS] = $msg;
+    }
+
+    public static function setError($msg){
+        $_SESSION[User::ERROR] = $msg;
+    }
+
+    public static function getSuccess(){
+        
+        $msg = (isset($_SESSION[User::SUCCESS]) && $_SESSION[User::SUCCESS]) ? $_SESSION[User::SUCCESS] : "";
+
+        User::clearSuccess();
+
+        return $msg;
+
+    }
+
+    public static function getError(){
+
+        $msg = (isset($_SESSION[User::ERROR]) && $_SESSION[User::ERROR]) ? $_SESSION[User::ERROR] : "";
+
+        User::clearError();
+
+        return $msg;
+
+    }
+
+    public static function clearSuccess(){
+        $_SESSION[User::SUCCESS] = NULL;
+    }    
+
+    public static function clearError(){
+        $_SESSION[User::ERROR] = NULL;
+    }
 
     public function setPhoto($file){
         $extension = explode('.', $file['name']);

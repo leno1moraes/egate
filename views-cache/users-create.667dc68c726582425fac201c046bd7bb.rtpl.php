@@ -18,9 +18,23 @@
   <div class="row">
   	<div class="col-md-12">
   		<div class="box box-success">
+
         <div class="box-header with-border">
+          
+          
+          <a href="/admin/users">
+            <button type="button" class="btn btn-secondary" >Voltar</button>
+          </a>
+          <br><br>
+          <!--
+          <div class="alert-success alert-dismissible" style="margin: 10px">
+            <p>Cadastrado com sucesso</p>
+          </div>
+          -->
+
           <h3 class="box-title">Novo Usuário</h3>
         </div>
+
         <!-- /.box-header -->
         <!-- form start -->
         <form role="form" action="/admin/users/create" method="post" enctype="multipart/form-data">

@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once("vendor/autoload.php");
 
 use \Slim\Slim;
@@ -12,6 +13,55 @@ $app->config('debug', true);
 /*********************************************************************************/
 /********************************* Inicio Rotas **********************************/
 /*********************************************************************************/
+
+$app->post('/admin/users/password/:id', function($id) {
+
+    if (!isset($_POST['despassword']) || $_POST['despassword'] === ''){
+        User::setError("Preencha Nova Senha");
+        header("Location: /admin/users/password/$id");
+        exit;
+    }
+
+    if (!isset($_POST['despassword-confirm']) || $_POST['despassword-confirm'] === ''){
+        User::setError("Por Favor, Confirme a Senha");
+        header("Location: /admin/users/password/$id");
+        exit;
+    }
+
+    if ($_POST['despassword'] !== $_POST['despassword-confirm']){
+        User::setError("Por Favor, Confirme a Senha");
+        header("Location: /admin/users/password/$id");
+        exit;
+    }    
+
+    $user = new User();
+
+    $user->get((int)$id);
+
+    /*coloca aqui o save altera senha*/
+
+    User::setSuccess("Senha alterada com sucesso");
+
+    header("Location: /admin/users/password/$id");
+    exit;
+    
+});
+
+$app->get('/admin/users/password/:id', function($id) {
+
+    $user = new User();
+
+    $user->get((int)$id);    
+
+    $page = new Page();
+
+	$page->setTpl("users-password",[
+        "user"=>$user->getValues(),
+        "msgError"=>User::getError(),
+        "msgSuccess"=>User::getSuccess()
+    ]);
+    
+});
 
 $app->get('/admin/users/delete/:id', function($id) {
 
@@ -44,13 +94,20 @@ $app->post('/admin/users/update/:id', function($id) {
 
     $user = new User();
 
-    $user->get((int)$id);    
+    $user->get((int)$id);
 
-    $page = new Page();
+    $user->setData($_POST);
 
-	$page->setTpl("users-update",[
-        "user"=>$user->getValues()
-    ]);
+    /*var_dump($_POST);
+    exit;*/
+
+    $user->save();
+
+    if($_FILES["file"]["name"] !== "")
+        $user->setPhoto($_FILES["file"]);    
+
+    header("Location: /admin/users");
+    exit;
     
 });
 
