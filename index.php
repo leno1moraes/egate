@@ -229,19 +229,15 @@ $app->get('/admin/users/create', function() {
 
 	$page = new Page();
 
+    /*
     $user = new User();
-
     $_POST['id'] = 0;    
-
     $user->setData($_POST);
-
     $user->save();
-
     if($_FILES["file"]["name"] !== "")
-        $user->setPhoto($_FILES["file"]);
+        $user->setPhoto($_FILES["file"]);*/
     
-    header("Location: /admin/users/create");
-    exit;
+    $page->setTpl("users-create");
     
 });
 
