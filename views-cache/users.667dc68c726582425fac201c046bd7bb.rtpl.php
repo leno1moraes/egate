@@ -6,7 +6,7 @@
     Lista de Usuários
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#"><i class="fa fa-dashboard"></i> Início</a></li>
     <li class="active"><a href="#">Usuários</a></li>
   </ol>
 </section>

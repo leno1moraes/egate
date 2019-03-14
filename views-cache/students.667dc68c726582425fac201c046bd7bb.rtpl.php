@@ -6,7 +6,7 @@
     Lista de Estudantes
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#"><i class="fa fa-dashboard"></i> Início</a></li>
     <li class="active"><a href="#">Estudantes</a></li>
   </ol>
 </section>
@@ -45,7 +45,7 @@
                     <th>Período</th>
                     <th> Permissão</th>
                     <th style="width: 100px">Foto</th>
-                    <th style="width: 240px">&nbsp;</th>
+                    <th style="width: 140px">&nbsp;</th>
                   </tr>
                 </thead>
 
@@ -82,7 +82,7 @@
                     </td>                 
                     <td>
                       <a href="/admin/student/update/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                      <a href="#" class="btn btn-default btn-xs"><i class="fa fa-unlock"></i> Alterar Senha</a>
+                      <!--<a href="#" class="btn btn-default btn-xs"><i class="fa fa-unlock"></i> Alterar Senha</a>-->
                       <a href="/admin/student/delete/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
                   </tr>
