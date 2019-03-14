@@ -5,6 +5,7 @@ require_once("vendor/autoload.php");
 use \Slim\Slim;
 use \Geral\Page;
 use \Geral\Model\User;
+use \Geral\Model\Student;
 
 $app = new Slim();
 $app->config('debug', true);
@@ -111,17 +112,63 @@ $app->post('/admin/users/update/:id', function($id) {
     
 });
 
+$app->post('/admin/student/create', function() {
+
+    $student = new Student();
+
+    $_POST['id'] = 0;
+    
+    if($_FILES["file"]["name"] !== "") 
+        $_POST['dephoto'] = 1;
+    else 
+        $_POST['dephoto'] = 0;
+
+    $student->setData($_POST);
+
+    $student->save();
+
+    if($_FILES["file"]["name"] !== "")
+        $student->setPhoto($_FILES["file"]);
+    
+    header("Location: /admin/student/create");
+    exit;    
+        
+});
+
+$app->get('/admin/student/create', function() {
+
+	$page = new Page();
+
+    $page->setTpl("student-create");
+        
+});
+
 $app->get('/admin/users/create', function() {
 
 	$page = new Page();
 
-	$page->setTpl("users-create");
+    $user = new User();
+
+    $_POST['id'] = 0;
+    
+    if($_FILES["file"]["name"] !== "") 
+        $_POST['dephoto'] = 1;
+    else 
+        $_POST['dephoto'] = 0;
+
+    $user->setData($_POST);
+
+    $user->save();
+
+    if($_FILES["file"]["name"] !== "")
+        $user->setPhoto($_FILES["file"]);
+    
+    header("Location: /admin/users/create");
+    exit;
     
 });
 
 $app->post('/admin/users/create', function() {
-
-	$page = new Page();
 
     $user = new User();
 
@@ -143,6 +190,16 @@ $app->post('/admin/users/create', function() {
     
     header("Location: /admin/users");
     exit;
+    
+});
+
+$app->get('/admin/students', function() {
+
+	$page = new Page();
+
+	$page->setTpl("students",[
+		'students'=>Student::listAll()
+	]);
     
 });
 
