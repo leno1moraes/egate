@@ -57,13 +57,17 @@
             </div>
 
             <div class="form-group">
-              <label for="file">Foto</label>
-              <input type="file" class="form-control" id="file" name="file">
+
+              <label for="file" class="btn btn-primary"> Enviar Foto
+                <input type="file" class="form-control" id="file" style="display: none;" name="file">
+              </label>
+
               <div class="box box-widget">
                 <div class="box-body">
-                  <img class="img-responsive" id="image-preview" src="/res/avatar-profile.png" alt="Photo" width="100" height="100">
+                  <img class="img-responsive" id="image-preview" src="/res/avatar-profile.png" alt="Photo" width="100" height="100" style="margin: -50px 0px 0px 120px"> 
                 </div>
               </div>
+
             </div>    
 
           </div>

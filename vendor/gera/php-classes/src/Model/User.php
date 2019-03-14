@@ -10,6 +10,7 @@ class User extends Model {
     const SUCCESS = "UserSuccess";
     const ERROR = "UserError";
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     public static function setSuccess($msg){
         $_SESSION[User::SUCCESS] = $msg;
     }
@@ -25,7 +26,6 @@ class User extends Model {
         User::clearSuccess();
 
         return $msg;
-
     }
 
     public static function getError(){
@@ -35,7 +35,6 @@ class User extends Model {
         User::clearError();
 
         return $msg;
-
     }
 
     public static function clearSuccess(){
@@ -44,6 +43,20 @@ class User extends Model {
 
     public static function clearError(){
         $_SESSION[User::ERROR] = NULL;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    
+    public function setPassword($pass){
+        
+        $sql = new Sql(); 
+
+        $sql->query("UPDATE tb_user SET despassword = :password WHERE id = :iduser", array(
+            ":password"=>$pass,
+            ":iduser"=>$this->getid()
+        ));
+
     }
 
     public function setPhoto($file){

@@ -38,7 +38,7 @@ $app->post('/admin/users/password/:id', function($id) {
 
     $user->get((int)$id);
 
-    /*coloca aqui o save altera senha*/
+    $user->setPassword($_POST['despassword']);
 
     User::setSuccess("Senha alterada com sucesso");
 

@@ -13,6 +13,12 @@
   <div class="row">
   	<div class="col-md-12">
   		<div class="box box-primary">
+
+        <br>
+        <a href="/admin/users">
+          <button type="button" class="btn btn-secondary" >Voltar</button><br><br>
+        </a>        
+
         <div class="box-header with-border">
           <h3 class="box-title">Editar Senha do Usuário</h3>
         </div>
