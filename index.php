@@ -64,6 +64,67 @@ $app->get('/admin/users/password/:id', function($id) {
     
 });
 
+$app->get('/admin/student/update/:id', function($id) {
+
+    $student = new Student();
+
+    $student->get((int)$id);    
+
+    $page = new Page();
+
+	$page->setTpl("student-update",[
+        "student"=>$student->getValues()
+    ]);
+    
+});
+
+$app->post('/admin/student/update/:id', function($id) {
+
+    $student = new Student();
+
+    $student->get((int)$id);    
+
+    if(isset($_POST['desstatus'])){
+        if ($_POST['desstatus'] === "on" || $_POST['desstatus'] === "1")
+            $_POST['desstatus'] = '1';
+        else
+            $_POST['desstatus'] = '0';    
+    }else{
+        $_POST['desstatus'] = '0';
+    }
+
+    if($_FILES["file"]["name"] !== "") 
+        $_POST['dephoto'] = 1;     
+
+    if(isset($_POST['fident'])){       
+        if ($_POST['fident']  === "1")
+            $_POST['dephoto'] = 0;
+    }        
+
+    $student->setData($_POST);
+
+    $student->save();
+
+    if($_FILES["file"]["name"] !== "")
+        $student->setPhoto($_FILES["file"]);    
+
+    header("Location: /admin/students");
+    exit;    
+});
+
+$app->get('/admin/student/delete/:id', function($id) {
+
+    $student = new Student();
+
+    $student->get((int)$id);    
+
+    $student->delete();
+
+    header("Location: /admin/students");
+    exit;
+    
+});
+
 $app->get('/admin/users/delete/:id', function($id) {
 
     $user = new User();
@@ -97,10 +158,28 @@ $app->post('/admin/users/update/:id', function($id) {
 
     $user->get((int)$id);
 
-    $user->setData($_POST);
+    if(isset($_POST['desstatus'])){
+        if ($_POST['desstatus'] === "on" || $_POST['desstatus'] === "1")
+            $_POST['desstatus'] = '1';
+        else
+            $_POST['desstatus'] = '0';    
+    }else{
+        $_POST['desstatus'] = '0';
+    }
 
-    /*var_dump($_POST);
-    exit;*/
+    if($_FILES["file"]["name"] !== "") 
+        $_POST['desurl'] = 1; 
+
+    if(isset($_POST['fident'])){
+        /*
+        var_dump($_POST['fident']);
+        exit;*/        
+        if ($_POST['fident']  === "1")
+            $_POST['desurl'] = 0;
+    }
+         
+
+    $user->setData($_POST);
 
     $user->save();
 
@@ -117,11 +196,14 @@ $app->post('/admin/student/create', function() {
     $student = new Student();
 
     $_POST['id'] = 0;
+
+    if ($_POST['desstatus'] === "on" || $_POST['desstatus'] === "1")
+        $_POST['desstatus'] = '1';
+    else
+        $_POST['desstatus'] = '0';
     
     if($_FILES["file"]["name"] !== "") 
         $_POST['dephoto'] = 1;
-    else 
-        $_POST['dephoto'] = 0;
 
     $student->setData($_POST);
 
@@ -130,7 +212,7 @@ $app->post('/admin/student/create', function() {
     if($_FILES["file"]["name"] !== "")
         $student->setPhoto($_FILES["file"]);
     
-    header("Location: /admin/student/create");
+    header("Location: /admin/students");
     exit;    
         
 });
@@ -149,12 +231,7 @@ $app->get('/admin/users/create', function() {
 
     $user = new User();
 
-    $_POST['id'] = 0;
-    
-    if($_FILES["file"]["name"] !== "") 
-        $_POST['dephoto'] = 1;
-    else 
-        $_POST['dephoto'] = 0;
+    $_POST['id'] = 0;    
 
     $user->setData($_POST);
 
@@ -178,8 +255,6 @@ $app->post('/admin/users/create', function() {
     
     if($_FILES["file"]["name"] !== "") 
         $_POST['desurl'] = 1;
-    else 
-        $_POST['desurl'] = 0;
 
     $user->setData($_POST);
 

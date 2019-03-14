@@ -8,7 +8,13 @@ use \Geral\Model;
 class Student extends Model {
 
 
+    public function delete(){
+        $sql = new Sql();      
 
+        $sql->query("DELETE FROM tb_student WHERE id = :iduser", array(
+            ":iduser"=>$this->getid()
+        ));        
+    }
 
     public function save (){
         
@@ -65,6 +71,19 @@ class Student extends Model {
         $sql = new Sql();
 
         return $sql->select("SELECT * FROM tb_student ORDER BY id");
+
+    }    
+
+    public function get($id){
+        
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT * FROM tb_student WHERE id = :iduser", array(
+            ":iduser"=>$id
+        ));
+
+        $this->setData($results[0]);
+        
     }    
 
 }

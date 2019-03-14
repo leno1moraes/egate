@@ -81,9 +81,9 @@
                       <img class="img-responsive" id="image-preview" {if="$value.dephoto == '1' "} src="/res/photo-student/student-{$value.id}.jpg" {else} src="/res/avatar-profile.png" {/if} alt="Photo" width="30" height="30">            
                     </td>                 
                     <td>
-                      <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                      <a href="/admin/student/update/{$value.id}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
                       <a href="#" class="btn btn-default btn-xs"><i class="fa fa-unlock"></i> Alterar Senha</a>
-                      <a href="#" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
+                      <a href="/admin/student/delete/{$value.id}" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
                   </tr>
                   {/loop}

@@ -72,12 +72,21 @@
 
             <div class="form-group">
                 <label for="desperiodo">Período</label>
-                <input type="email" class="form-control" id="desperiodo" name="desperiodo" placeholder="Digite o e-mail" required>
+                <select class="form-control" id="desperiodo" name="desperiodo">
+                  <option value="0"></option>
+                  <option value="1">1º A</option>
+                  <option value="2">1º B</option>
+                  <option value="3">2º A</option>
+                  <option value="4">2º B</option>
+                  <option value="5">3º A</option>
+                  <option value="6">3º B</option>
+                </select>
+                <!--<input type="email" class="form-control" id="desperiodo" name="desperiodo" placeholder="Digite o e-mail" required>-->
             </div>
 
             <div class="checkbox">
                 <label>
-                  <input type="checkbox" name="desstatus" checked> <bold>Status</bold>
+                  <input type="checkbox" id="desstatus" name="desstatus" checked> <bold>Permissão para Entrar</bold>
                 </label>
             </div>
             <br>

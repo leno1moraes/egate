@@ -49,15 +49,27 @@
                 <input type="checkbox" name="desstatus" value="1" <?php if( $user["desstatus"] == 1 ){ ?>checked<?php } ?>> Status
               </label>
             </div>
+           
 
             <div class="form-group">
-              <label for="file">Foto</label>
-              <input type="file" class="form-control" id="file" name="file">
+              <input type="hidden" id="fident" name="fident" value="0">
+
+              <label for="file" class="btn btn-primary"> Enviar Foto
+                <input type="file" class="form-control" id="file" style="display: none;" name="file">                 
+              </label>
+
+              <button type="button" id="delPhoto" name="delPhoto" class="btn btn-danger">Deletar Foto</button>
+
               <div class="box box-widget">
                 <div class="box-body">
-                  <img class="img-responsive" id="image-preview" <?php if( $user["desurl"] == '1'  ){ ?> src="/res/photo-profile/profile-<?php echo htmlspecialchars( $user["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" <?php }else{ ?> src="/res/avatar-profile.png" <?php } ?> alt="Photo" width="60" height="60">   
+                  <img class="img-responsive" id="image-preview" <?php if( $user["desurl"] == '1'  ){ ?> src="/res/photo-profile/profile-<?php echo htmlspecialchars( $user["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" <?php }else{ ?> src="/res/avatar-profile.png" <?php } ?> alt="Photo" width="100" height="100" style="margin: -5px 0px 0px 120px">   
                 </div>
+
+                
+
               </div>
+
+              
             </div> 
   
 
@@ -88,6 +100,15 @@
     }
   
     file.readAsDataURL(this.files[0]);
-  
+
   });
+
+
+  document.querySelector('#delPhoto').addEventListener('click', function(){    
+    //alert("Entrei aqui");
+    $('#fident').val("1");
+    $('#file').val("");
+    document.querySelector('#image-preview').src = "/res/avatar-profile.png";
+  });
+
   </script>
