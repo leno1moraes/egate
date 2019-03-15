@@ -110,7 +110,7 @@ CREATE TABLE `tb_registrygate` (
   CONSTRAINT `fk_action` FOREIGN KEY (`iaction`) REFERENCES `tb_action` (`id`),
   CONSTRAINT `fk_gate` FOREIGN KEY (`gate`) REFERENCES `tb_gate` (`id`),
   CONSTRAINT `fk_student` FOREIGN KEY (`student`) REFERENCES `tb_student` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `tb_registrygate` (
 
 LOCK TABLES `tb_registrygate` WRITE;
 /*!40000 ALTER TABLE `tb_registrygate` DISABLE KEYS */;
-INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1),(2,1,'2019-03-14 17:29:51',3,2);
+INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1),(2,1,'2019-03-14 17:29:51',3,2),(4,1,'2019-03-14 21:15:00',1,1),(5,1,'2019-03-14 21:15:56',3,2),(6,1,'2019-03-14 21:16:01',1,1),(7,1,'2019-03-14 21:16:05',3,2);
 /*!40000 ALTER TABLE `tb_registrygate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,6 +239,7 @@ BEGIN
     DECLARE IDGATE INT;
     DECLARE ASTATUS INT;
     DECLARE FUNCTIONGATE VARCHAR(45);
+    DECLARE ACCESS INT;
     
 	/*VERIFICAR SE O TICKET ESTÁ VINCULADO A UM ESTUDANTE*/
     IF EXISTS (SELECT id FROM tb_student WHERE desid2 = pidticket) THEN
@@ -254,7 +255,8 @@ BEGIN
 		
         SET IDSTUDENT = (SELECT id FROM tb_student WHERE desid2 = pidticket);
         SET IDGATE = (SELECT id FROM tb_gate WHERE descode = pidgate);
-		SET FUNCTIONGATE = (SELECT iaction FROM tb_gate WHERE id = IDGATE);  
+		SET FUNCTIONGATE = (SELECT iaction FROM tb_gate WHERE id = IDGATE);
+        SET ACCESS = (SELECT desstatus FROM tb_student WHERE id = IDSTUDENT);
         
 		SET ASTATUS = ( SELECT c.iaction 
 						FROM tb_registrygate c
@@ -267,19 +269,26 @@ BEGIN
         3 - SAIR
         */		
         IF (FUNCTIONGATE = 1 AND ASTATUS = 3) THEN 
-			/*INSERT INTO tb_registrygate (student, data, iaction, gate)
-			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE);*/
+			INSERT INTO tb_registrygate (student, data, iaction, gate)
+			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE);
             
-            SET ANSWER = 'LIBERAR_ENTRADA';
+            IF (ACCESS = 1) THEN
+				SET ANSWER = 'LIBERAR_ENTRADA';
+                
+            ELSE
+				SET ANSWER = 'BLOQUEADO';
+                
+            END IF;
             
         ELSEIF (FUNCTIONGATE = 3 AND ASTATUS = 1) THEN 
-			/*INSERT INTO tb_registrygate (student, data, iaction, gate)
-			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE);*/
+			INSERT INTO tb_registrygate (student, data, iaction, gate)
+			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE);
             
             SET ANSWER = 'LIBERAR_SAIDA';
         
         ELSE
 			SET ANSWER = 'BLOQUEADO';
+            
         END IF;
         
     END IF;
@@ -402,4 +411,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-14 19:07:17
+-- Dump completed on 2019-03-14 21:17:42
