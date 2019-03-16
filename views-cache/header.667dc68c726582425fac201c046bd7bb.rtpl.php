@@ -176,9 +176,9 @@ desired effect
 
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="/admin/users"><i class="fa fa-user"></i> <span>Cadastrar Usuário</span></a></li>
-        <li class="active"><a href="/admin/students"><i class="fa fa-users"></i> <span>Cadastrar Aluno</span></a></li>        
-        <li class="active"><a href="#"><i class="fa fa-ticket"></i> <span>Simulador Gate</span></a></li>   
-        <li class="active"><a href="#"><i class="fa fa-list-alt"></i> <span>Log</span></a></li>   
+        <li class="active"><a href="/admin/students"><i class="fa fa-users"></i> <span>Cadastrar Aluno</span></a></li>                  
+        <li class="active"><a href="/admin/log"><i class="fa fa-list-alt"></i> <span>Log</span></a></li>   
+        <li class="active"><a href="#"><i class="fa fa-ticket"></i> <span>Simulador Gate</span></a></li> 
         <!--
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>

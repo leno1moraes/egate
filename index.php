@@ -6,6 +6,7 @@ use \Slim\Slim;
 use \Geral\Page;
 use \Geral\Model\User;
 use \Geral\Model\Student;
+use \Geral\Model\Gate;
 
 $app = new Slim();
 $app->config('debug', true);
@@ -261,6 +262,16 @@ $app->post('/admin/users/create', function() {
     
     header("Location: /admin/users");
     exit;
+    
+});
+
+$app->get('/admin/log', function() {
+
+	$page = new Page();
+
+	$page->setTpl("loglistregistrygate",[
+		'log'=>Gate::listAll()
+	]);
     
 });
 
