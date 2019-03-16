@@ -105,6 +105,7 @@ CREATE TABLE `tb_registrygate` (
   `data` datetime NOT NULL,
   `iaction` int(11) NOT NULL,
   `gate` int(11) NOT NULL,
+  `desmessage` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_student` (`student`),
   KEY `fk_action` (`iaction`),
@@ -112,7 +113,7 @@ CREATE TABLE `tb_registrygate` (
   CONSTRAINT `fk_action` FOREIGN KEY (`iaction`) REFERENCES `tb_action` (`id`),
   CONSTRAINT `fk_gate` FOREIGN KEY (`gate`) REFERENCES `tb_gate` (`id`),
   CONSTRAINT `fk_student` FOREIGN KEY (`student`) REFERENCES `tb_student` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +122,7 @@ CREATE TABLE `tb_registrygate` (
 
 LOCK TABLES `tb_registrygate` WRITE;
 /*!40000 ALTER TABLE `tb_registrygate` DISABLE KEYS */;
-INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1),(2,1,'2019-03-14 17:29:51',3,2),(4,1,'2019-03-14 21:15:00',1,1),(5,1,'2019-03-14 21:15:56',3,2),(6,1,'2019-03-14 21:16:01',1,1),(7,1,'2019-03-14 21:16:05',3,2);
+INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1,'LIBERAR_ENTRADA'),(2,1,'2019-03-14 17:29:51',3,2,'LIBERAR_ENTRADA'),(8,1,'2019-03-15 18:25:09',1,1,'LIBERAR_ENTRADA'),(9,1,'2019-03-15 21:29:16',3,2,'LIBERAR_ENTRADA'),(10,1,'2019-03-15 21:32:20',1,1,'LIBERAR_ENTRADA'),(11,1,'2019-03-15 21:33:23',3,2,'LIBERAR_ENTRADA'),(12,1,'2019-03-15 21:33:57',1,1,'LIBERAR_ENTRADA'),(13,1,'2019-03-15 21:34:01',3,2,'LIBERAR_ENTRADA'),(14,1,'2019-03-15 21:47:38',1,1,'LIBERAR_ENTRADA'),(15,1,'2019-03-15 21:48:06',1,1,'BLOQUEADO'),(16,1,'2019-03-15 21:48:39',3,2,'LIBERAR_SAIDA'),(17,1,'2019-03-15 22:00:57',1,1,'LIBERAR_ENTRADA'),(18,1,'2019-03-15 22:01:01',1,1,'BLOQUEADO'),(19,1,'2019-03-15 22:01:12',3,2,'LIBERAR_SAIDA'),(20,1,'2019-03-15 22:05:52',3,2,'BLOQUEADO'),(21,1,'2019-03-15 22:05:55',1,1,'LIBERAR_ENTRADA'),(22,1,'2019-03-15 22:05:59',3,2,'LIBERAR_SAIDA');
 /*!40000 ALTER TABLE `tb_registrygate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,6 +215,32 @@ INSERT INTO `tb_user` VALUES (2,'leno',1,'2019-03-12 00:00:00','Leno Grazianny 4
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tbl_messages`
+--
+
+DROP TABLE IF EXISTS `tbl_messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `clientID` varchar(45) DEFAULT NULL,
+  `topic` varchar(45) DEFAULT NULL,
+  `message` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_messages`
+--
+
+LOCK TABLES `tbl_messages` WRITE;
+/*!40000 ALTER TABLE `tbl_messages` DISABLE KEYS */;
+INSERT INTO `tbl_messages` VALUES (1,'ID1','enviarTicket','teste');
+/*!40000 ALTER TABLE `tbl_messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping events for database 'egatedatabase'
 --
 
@@ -271,25 +298,33 @@ BEGIN
         3 - SAIR
         */		
         IF (FUNCTIONGATE = 1 AND ASTATUS = 3) THEN 
-			INSERT INTO tb_registrygate (student, data, iaction, gate)
-			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE);
             
             IF (ACCESS = 1) THEN
 				SET ANSWER = 'LIBERAR_ENTRADA';
                 
+				INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+				VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);                
+                
             ELSE
 				SET ANSWER = 'BLOQUEADO';
+                
+				INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+				VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);  
                 
             END IF;
             
         ELSEIF (FUNCTIONGATE = 3 AND ASTATUS = 1) THEN 
-			INSERT INTO tb_registrygate (student, data, iaction, gate)
-			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE);
             
             SET ANSWER = 'LIBERAR_SAIDA';
-        
+            
+			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);  
+                
         ELSE
 			SET ANSWER = 'BLOQUEADO';
+            
+			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);              
             
         END IF;
         
@@ -413,4 +448,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-14 21:17:16
+-- Dump completed on 2019-03-15 22:07:29
