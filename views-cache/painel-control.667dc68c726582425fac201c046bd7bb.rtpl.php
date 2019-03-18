@@ -33,30 +33,32 @@
                         <th style="width: 10px; text-align: center;">Painel de Visualização</th>
                       </tr>
                     </thead>    
-                    <tbody>                      
-                      
+                    <tbody>     
+
+                      <?php $counter1=-1;  if( isset($loglive) && ( is_array($loglive) || $loglive instanceof Traversable ) && sizeof($loglive) ) foreach( $loglive as $key1 => $value1 ){ $counter1++; ?>
                       <tr align="center">
                         <td> 
-                          <img class="img-responsive" id="image-preview" src="/res/photo-profile/profile-2.jpg" alt="Photo" width="100" height="100">   
+                          <img class="img-responsive" id="image-preview" <?php if( $value1["dephoto"] == '1'  ){ ?> src="/res/photo-student/student-<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" <?php }else{ ?> src="/res/avatar-profile.png" <?php } ?> alt="Photo" width="100" height="100">   
                         </td>                
                       </tr>
                       
                       <tr>
-                        <td> <b>Estudante</b> <input type="text" class="form-control" id="" name="" readonly> </td>                
+                        <td> <b>Estudante</b> <input type="text" class="form-control" id="desname" name="desname" value="<?php echo htmlspecialchars( $value1["desname"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly> </td>                
                       </tr>
                       
                       <tr>
-                        <td> <b>Período</b> <input type="text" class="form-control" id="" name="" readonly> </td>                
+                        <td> <b>Período</b> <input type="text" class="form-control" id="data" name="data" value="<?php echo htmlspecialchars( $value1["data"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly> </td>                
                       </tr>                      
 
                       <tr>
-                        <td> <b>E-mail</b> <input type="text" class="form-control" id="" name="" readonly> </td>                
+                        <td> <b>E-mail de Aviso</b> <input type="text" class="form-control" id="desemailnotice" name="desemailnotice" value="<?php echo htmlspecialchars( $value1["desemailnotice"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly> </td>                
                       </tr>
                       
                       <tr>
-                        <td> <b>Status</b> <input type="text" class="form-control" id="" name="" readonly> </td>                
+                        <td> <b>Status</b> <input type="text" class="form-control" id="desmessage" name="desmessage" value="<?php echo htmlspecialchars( $value1["desmessage"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly> </td>                
                       </tr>
 
+                      <?php } ?>
                     </tbody>
                   </table>
 

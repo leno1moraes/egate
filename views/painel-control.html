@@ -33,30 +33,32 @@
                         <th style="width: 10px; text-align: center;">Painel de Visualização</th>
                       </tr>
                     </thead>    
-                    <tbody>                      
-                      
+                    <tbody>     
+
+                      {loop="$loglive"}
                       <tr align="center">
                         <td> 
-                          <img class="img-responsive" id="image-preview" src="/res/photo-profile/profile-2.jpg" alt="Photo" width="100" height="100">   
+                          <img class="img-responsive" id="image-preview" {if="$value.dephoto == '1' "} src="/res/photo-student/student-{$value.id}.jpg" {else} src="/res/avatar-profile.png" {/if} alt="Photo" width="100" height="100">   
                         </td>                
                       </tr>
                       
                       <tr>
-                        <td> <b>Estudante</b> <input type="text" class="form-control" id="" name="" readonly> </td>                
+                        <td> <b>Estudante</b> <input type="text" class="form-control" id="desname" name="desname" value="{$value.desname}" readonly> </td>                
                       </tr>
                       
                       <tr>
-                        <td> <b>Período</b> <input type="text" class="form-control" id="" name="" readonly> </td>                
+                        <td> <b>Período</b> <input type="text" class="form-control" id="data" name="data" value="{$value.data}" readonly> </td>                
                       </tr>                      
 
                       <tr>
-                        <td> <b>E-mail</b> <input type="text" class="form-control" id="" name="" readonly> </td>                
+                        <td> <b>E-mail de Aviso</b> <input type="text" class="form-control" id="desemailnotice" name="desemailnotice" value="{$value.desemailnotice}" readonly> </td>                
                       </tr>
                       
                       <tr>
-                        <td> <b>Status</b> <input type="text" class="form-control" id="" name="" readonly> </td>                
+                        <td> <b>Status</b> <input type="text" class="form-control" id="desmessage" name="desmessage" value="{$value.desmessage}" readonly> </td>                
                       </tr>
 
+                      {/loop}
                     </tbody>
                   </table>
 

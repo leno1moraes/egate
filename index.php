@@ -7,6 +7,7 @@ use \Geral\Page;
 use \Geral\Model\User;
 use \Geral\Model\Student;
 use \Geral\Model\Gate;
+use \Geral\Model\Loglive;
 
 $app = new Slim();
 $app->config('debug', true);
@@ -266,11 +267,13 @@ $app->post('/admin/users/create', function() {
     
 });
 
-$app->get('/admin/painelcontrol', function() {
+$app->get('/admin/painelcontrol', function() {    
 
 	$page = new Page();
 
-	$page->setTpl("painel-control");
+	$page->setTpl("painel-control", [
+        'loglive'=>Loglive::getLogLive()
+    ]);
     
 });
 
