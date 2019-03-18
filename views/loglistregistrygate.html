@@ -7,7 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Início</a></li>
-        <li class="active"><a href="#">Estudantes</a></li>
+        <li class="active"><a href="#">Log de Registros</a></li>
       </ol>
     </section>
     
@@ -21,9 +21,9 @@
                 <div class="box-header">
                   <div class="box-tools">
                     
-                    <form action="/admin/users">
+                    <form action="/admin/log">
                       <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="search" class="form-control pull-right" placeholder="Search" value="">
+                        <input type="text" name="search" class="form-control pull-right" placeholder="Search" value="{$search}">
                         <div class="input-group-btn">
                           <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
@@ -52,7 +52,7 @@
                       <tr>
                         <td> {$value.id} </td>
                         <td> {$value.desname} </td>
-                        <td> {$value.data} </td>
+                        <td> {function="formatDate($value.data)"} </td>
                         <td> {$value.desaction} </td>
                         <td> {$value.descode} </td>
                         <td> {$value.desmessage} </td>                 
@@ -64,16 +64,17 @@
                 </div>
                 <!-- /.box-body -->
     
-                <!--
+                
                 <div class="box-footer clearfix">
+                  
                   <ul class="pagination pagination-sm no-margin pull-right">                
                     {loop="$pages"}
-                    <li><a href="{$value.href}">{$value.text}</a></li>
+                    <li><a href="{$value.href}">{$value.text}</a> </li>
                     {/loop}
                   </ul>
                 </div>
               </div>
-              -->
+              
     
               </div>
         </div>

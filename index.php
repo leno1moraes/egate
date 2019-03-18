@@ -11,6 +11,7 @@ use \Geral\Model\Gate;
 $app = new Slim();
 $app->config('debug', true);
 
+require_once("functions.php");
 
 /*********************************************************************************/
 /********************************* Inicio Rotas **********************************/
@@ -265,13 +266,50 @@ $app->post('/admin/users/create', function() {
     
 });
 
-$app->get('/admin/log', function() {
+$app->get('/admin/painelcontrol', function() {
 
 	$page = new Page();
 
-	$page->setTpl("loglistregistrygate",[
+	$page->setTpl("painel-control");
+    
+});
+
+
+$app->get('/admin/log', function() {
+
+    $search = (isset($_GET['search'])) ? $_GET['search'] : "";
+    $page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+
+    if ($search != '') {
+        $pagination = Gate::getPageSearch($search, $page, 10);
+
+    }else{
+        $pagination = Gate::getPage($page, 10);
+
+    }
+
+    $pages = [];
+
+    for ($x = 0; $x < $pagination['pages']; $x++){
+        array_push($pages, [
+            'href'=>'/admin/log?'.http_build_query([
+                'page'=>$x+1,
+                'seach'=>$search
+            ]),
+            'text'=>$x+1
+        ]);
+    }
+
+	$page = new Page();
+
+	/*$page->setTpl("loglistregistrygate",[
 		'log'=>Gate::listAll()
-	]);
+    ]);*/
+	$page->setTpl("loglistregistrygate",[
+        "log"=>$pagination['data'],
+        "search"=>$search,
+        "pages"=>$pages
+	]);    
     
 });
 
