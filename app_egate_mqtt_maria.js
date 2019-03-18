@@ -171,6 +171,8 @@ function publishGateIn(ptopic, pclientID, pticket){
 	
 	var msg = "Cliente: " + pclientID + " - Mensagem: " + pticket;
 	
+	enviarEmailREsponsavel();
+	
 	client_send_a.publish(ptopic, msg);		
 	
 }
@@ -179,7 +181,43 @@ function publishGateOut(ptopic, pclientID, pticket){
 	
 	var msg ="Cliente: " + pclientID + " - Mensagem: " + pticket;
 	
+	enviarEmailREsponsavel();
+	
 	client_send_b.publish(ptopic, msg);	
+	
+}
+
+function enviarEmailREsponsavel(){
+	//href = 'http://egate.com/emailteste.php';
+	
+	var request = require('request');
+
+	// Set the headers
+	var headers = {
+		'User-Agent':       'Super Agent/0.0.1',
+		'Content-Type':     'application/x-www-form-urlencoded'
+	}
+
+	// Configure the request
+	var options = {
+		url: 'http://egate.com/emailteste.php'
+		,method: 'GET'
+		,headers: headers
+		//,qs: {'key1': 'xxx', 'key2': 'yyy'}
+	}
+
+	// Start the request
+	request(options, function (error, response, body) {
+		
+		if (!error && response.statusCode == 200) {
+			//console.log(body);
+			console.log("Executar com sucesso o arquivo do email");
+			
+		}else{
+			console.log("Error ao executar o arquivo do email");
+			
+		}
+	});
 	
 }
 

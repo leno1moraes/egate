@@ -11,7 +11,7 @@ $mail->isSMTP();
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-$mail->SMTPDebug = 2;
+$mail->SMTPDebug = 0;
 
 //Ask for HTML-friendly debug output
 $mail->Debugoutput = 'html';
@@ -38,7 +38,7 @@ $mail->Username = "noreplay.egate@gmail.com";
 $mail->Password = "18032019";
 
 //Set who the message is to be sent from
-$mail->setFrom('noreplay.egate@gmail.com', 'e-Gate Controle via Mysql');
+$mail->setFrom('noreplay.egate@gmail.com', 'e-Gate Controle via Node JavaScript');
 
 //Set an alternative reply-to address
 //$mail->addReplyTo('replyto@example.com', 'First Last');
