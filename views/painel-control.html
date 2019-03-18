@@ -45,7 +45,7 @@
           
           <tr align="center">
             <td> 
-              <img class="img-responsive" id="image-preview" src="/res/avatar-profile.png" alt="Photo" width="100" height="100">   
+              <img class="img-responsive" id="imagepreview" name="imagepreview" src="/res/avatar-profile.png" alt="Photo" width="100" height="100">   
             </td>                
           </tr>
           
@@ -89,17 +89,28 @@
 			
     		var queryString = {'timestamp' : timestamp};
     		
-        	$.get('gateserver.php', 
+        	$.get('/gateserver/gate.php', 
             	  queryString,            	  
             	  function(data){             	           
 
               	  var obj = jQuery.parseJSON(data);
               		                 				
                   $('#iptvfdesname').val(obj.desname);
-                                        
+                  
+                  $('#iptvfdata').val(new Date(obj.data).toLocaleString());
+
                   $('#iptvfdesemailnotice').val(obj.desemailnotice);
  
-                    					
+                  $('#iptvfdesmessage').val(obj.desmessage);
+
+                  if (obj.dephoto == "1") {
+                    $('#imagepreview').attr('src', '/res/photo-student/student-'+obj.idest+'.jpg');
+
+                  }else{
+                    $('#imagepreview').attr('src', '/res/avatar-profile.png');
+                  }
+
+
                	/*$.ajax({
          		        url: "pagegetimage.php",
          		        type: "get",

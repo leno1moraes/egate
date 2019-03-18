@@ -25,19 +25,7 @@
      user experience. Slimscroll is required when using the
      fixed layout. -->
 
-<script>
-
-  $(document).ready (function(){	    
-  
-    /*$('#btnTeste').click(function(){
-      alert("Teste Aqui");
-    });*/ 	
-          
-    /*$('#iptvfdesname').click(function(){
-      alert("Teste 2 Aqui 2");
-    });*/     
-          
-  });      
+<script>    
 </script>
             
 </body>
