@@ -18,9 +18,27 @@
 <!-- AdminLTE App -->
 <script src="/res/admin/dist/js/app.min.js"></script>
 
+<!--<script type="text/javascript" src="/res/admin/plugins/jQuery/jquery.js"></script>-->
+
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+
+<script>
+
+  $(document).ready (function(){	    
+  
+    /*$('#btnTeste').click(function(){
+      alert("Teste Aqui");
+    });*/ 	
+          
+    /*$('#iptvfdesname').click(function(){
+      alert("Teste 2 Aqui 2");
+    });*/     
+          
+  });      
+</script>
+            
 </body>
 </html>

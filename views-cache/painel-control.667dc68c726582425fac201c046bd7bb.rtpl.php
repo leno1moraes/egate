@@ -1,80 +1,129 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Visor de Fluxo
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Início</a></li>
-        <li class="active"><a href="#">Visor de Fluxo</a></li>
-      </ol>
-    </section>
-    
-    <!-- Main content -->
-    <section class="content">
-    
-      <div class="row">
-        <div class="col-md-6">
-          <div class="box box-primary">
-                
-                <div class="box-header">
-                  <div class="box-tools">                    
-    
-                  </div>
-                </div>
-                <br><br>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>e-Gate</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="/res/admin/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/res/admin/dist/css/AdminLTE.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="/res/admin/plugins/iCheck/square/blue.css">
 
-                <div class="box-body no-padding">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition bg-light">
+<div class="wrapper">
 
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th style="width: 10px; text-align: center;">Painel de Visualização</th>
-                      </tr>
-                    </thead>    
-                    <tbody>     
+  <div class="">
+    <a href="/admin">Voltar para <b>e-</b>Gate</a>
+  </div>
+  <br><br>
 
-                      <?php $counter1=-1;  if( isset($loglive) && ( is_array($loglive) || $loglive instanceof Traversable ) && sizeof($loglive) ) foreach( $loglive as $key1 => $value1 ){ $counter1++; ?>
-                      <tr align="center">
-                        <td> 
-                          <img class="img-responsive" id="image-preview" <?php if( $value1["dephoto"] == '1'  ){ ?> src="/res/photo-student/student-<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" <?php }else{ ?> src="/res/avatar-profile.png" <?php } ?> alt="Photo" width="100" height="100">   
-                        </td>                
-                      </tr>
-                      
-                      <tr>
-                        <td> <b>Estudante</b> <input type="text" class="form-control" id="desname" name="desname" value="<?php echo htmlspecialchars( $value1["desname"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly> </td>                
-                      </tr>
-                      
-                      <tr>
-                        <td> <b>Período</b> <input type="text" class="form-control" id="data" name="data" value="<?php echo htmlspecialchars( $value1["data"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly> </td>                
-                      </tr>                      
+  <div class="col-md-6 box-body no-padding">
 
-                      <tr>
-                        <td> <b>E-mail de Aviso</b> <input type="text" class="form-control" id="desemailnotice" name="desemailnotice" value="<?php echo htmlspecialchars( $value1["desemailnotice"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly> </td>                
-                      </tr>
-                      
-                      <tr>
-                        <td> <b>Status</b> <input type="text" class="form-control" id="desmessage" name="desmessage" value="<?php echo htmlspecialchars( $value1["desmessage"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly> </td>                
-                      </tr>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="bg-primary">
+            <th style="width: 10px; text-align: center;">Painel de Visualização</th>
+          </tr>
+        </thead>    
+        <tbody>
 
-                      <?php } ?>
-                    </tbody>
-                  </table>
+          
+          <tr align="center">
+            <td> 
+              <img class="img-responsive" id="image-preview" src="/res/avatar-profile.png" alt="Photo" width="100" height="100">   
+            </td>                
+          </tr>
+          
+          <tr>
+            <td> <b>Estudante</b> <input type="text" class="form-control" id="iptvfdesname" name="iptvfdesname" readonly> </td>                
+          </tr>
+          
+          <tr>
+            <td> <b>Período</b> <input type="text" class="form-control" id="iptvfdata" name="iptvfdata" readonly> </td>                
+          </tr>                      
 
-                </div>                    
-                
-                <div class="box-footer clearfix">
+          <tr>
+            <td> <b>E-mail de Aviso</b> <input type="text" class="form-control" id="iptvfdesemailnotice" name="iptvfdesemailnotice" readonly> </td>                
+          </tr>
+          
+          <tr>
+            <td> <b>Status</b> <input type="text" class="form-control" id="iptvfdesmessage" name="iptvfdesmessage" readonly> </td>                
+          </tr>                      
+          
 
-                </div>
+        </tbody>
+      </table>
+
+    </div>   
 
 
-              </div>
-          </div>
-        </div>
-      </div>
-    
-    </section>
-    <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 2.2.3 -->
+<script src="/res/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="/res/admin/bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="/res/admin/plugins/iCheck/icheck.min.js"></script>
+
+<script>
+
+    	function getContent(timestamp) {		        
+			
+    		var queryString = {'timestamp' : timestamp};
+    		
+        	$.get('gateserver.php', 
+            	  queryString,            	  
+            	  function(data){             	           
+
+              	  var obj = jQuery.parseJSON(data);
+              		                 				
+                  $('#iptvfdesname').val(obj.desname);
+                                        
+                  $('#iptvfdesemailnotice').val(obj.desemailnotice);
+ 
+                    					
+               	/*$.ajax({
+         		        url: "pagegetimage.php",
+         		        type: "get",
+         		        data: {"id": obj.id} ,
+         		        success: function (response) {   
+         		        	$("#responseImage").attr("src",response);         		        	
+         		        },
+         		        error: function(jqXHR, textStatus, errorThrown) {
+         		           console.log(textStatus, errorThrown);
+         		        }
+         		    });*/						    				       
+          });                     		          
+    	}         
+        
+    	$(document).ready (function(){	    
+        setInterval(getContent, 1000);    	          
+      });  
+
+  /*$(document).ready (function(){	     	          
+    $('#iptvfdesname').click(function(){
+      alert("Teste 2 Aqui 2");
+    });             
+  });*/  
+</script>
+
+</body>
+</html>

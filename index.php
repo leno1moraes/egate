@@ -269,12 +269,16 @@ $app->post('/admin/users/create', function() {
 
 $app->get('/admin/painelcontrol', function() {    
 
-	$page = new Page();
+	$page = new Page([
+		"header"=>false,
+		"footer"=>false
+	]);
 
-	$page->setTpl("painel-control", [
-        'loglive'=>Loglive::getLogLive()
-    ]);
-    
+    $page->setTpl("painel-control");
+     
+	/*$page->setTpl("painel-control", [
+        'loglive'=>Loglive::getLive()
+    ])*/   
 });
 
 
