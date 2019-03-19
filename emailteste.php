@@ -2,6 +2,14 @@
 
 require_once("vendor/autoload.php");
 
+$paramStatus = (isset($_GET['status'])) ? $_GET['status'] : "";
+$paramEstudante = (isset($_GET['estudante'])) ? $_GET['estudante'] : "";
+$dataReg = (isset($_GET['datareg'])) ? $_GET['datareg'] : "";
+
+/*$paramStatus = "Saída Liberada";
+$paramEstudante = "Onel Moraes";
+$dataReg = "18/03/2019";*/
+
 $mail = new PHPMailer;
 
 //Tell PHPMailer to use SMTP
@@ -44,22 +52,33 @@ $mail->setFrom('noreplay.egate@gmail.com', 'e-Gate Controle Teste 5');
 //$mail->addReplyTo('replyto@example.com', 'First Last');
 
 //Set who the message is to be sent to
-$mail->addAddress('lenomoraes12@gmail.com', 'Nome do Usuario');
+$mail->addAddress('lenomoraes12@gmail.com', 'e-Gate IFMT Campus Avançado VRL Informa');
 
 //Set the subject line
 $mail->Subject = 'Teste de Envio Aqui';
 
-$paramEstudante = "Onel Moraes";
-$paramStatus = "Entrada Liberada";
-$dataReg = "18/03/2019";
-
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
 //$mail->msgHTML(file_get_contents('contents.php?status='.$paramStatus.'&estudante='.$paramEstudante.'&datareg='.$dataReg), dirname(__FILE__));
-$mail->msgHTML(file_get_contents('contents.php'), dirname(__FILE__), array('%status%' => $paramEstudante, '%estudante%' => $paramStatus, '%datareg%' => $dataReg));
+//$mail->msgHTML(file_get_contents('contents.php'), dirname(__FILE__), array('%status%' => $paramEstudante, '%estudante%' => $paramStatus, '%datareg%' => $dataReg));
+
+$body = "<html>
+        <head>
+        <meta http-equiv=\"Content-Type\" content=\"text/html; utf-8\">
+        <title>e-Gate</title>
+        </head>
+        <body>
+        <p style=\"font-family: Arial, Helvetica, sans-serif; font-size: 16px;\"><b>e</b>-Gate Informa </p>
+        <p style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px;\">Registro de: <b> ".$paramStatus." </b></p>
+        <p style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px;\">Estudante: <b> ".$paramEstudante." </b></p>
+        <p style=\"font-family: Arial, Helvetica, sans-serif; font-size: 14px;\">Data: <b> ".$dataReg." </b></p>
+        </body>
+        </html>";
+
+$mail->msgHTML($body);
 
 //Replace the plain text body with one created manually
-$mail->AltBody = 'This is a plain-text message body';
+//$mail->AltBody = 'This is a plain-text message body';
 
 //Attach an image file
 //$mail->addAttachment('images/phpmailer_mini.png');
