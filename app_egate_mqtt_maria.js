@@ -127,18 +127,24 @@ function  tratar_mensagem(topic, message_str, packet){
 	connection.query(sql, function (error, results) {
 		if (!error) {
 			
-			var sqlb = "SELECT desmessage FROM tb_registrygate WHERE id = (SELECT MAX(id) FROM tb_registrygate)";			
+			var sqlb = 	" SELECT d.desname, d.desemailnotice, a.data, a.desmessage "+
+						" FROM tb_registrygate a "+
+						" LEFT JOIN tb_action b ON a.iaction = b.id "+
+						" LEFT JOIN tb_gate c ON a.gate = c.id "+
+						" LEFT JOIN  tb_student d ON a.student = d.id "+
+						" WHERE a.id = (SELECT MAX(e.id) FROM tb_registrygate e)";
+						
 			connection.query(sqlb, function (errorb, resultsb) {
-
+				
 				if (clientID == "FR69TGA55") {
 					message = message + " - Resultado: " + resultsb[0].desmessage;
-					publishGateIn(topic, clientID, message);
+					publishGateIn(topic, clientID, message, resultsb[0].desname, resultsb[0].desemailnotice, resultsb[0].data, resultsb[0].desmessage);
 					
 				}
 				
 				if (clientID == "YU70YHS60") {
 					message = message + " - Resultado: " + resultsb[0].desmessage;
-					publishGateOut(topic, clientID, message);
+					publishGateOut(topic, clientID, message, resultsb[0].desname, resultsb[0].desemailnotice, resultsb[0].data, resultsb[0].desmessage);
 					
 				}			
 			
@@ -167,54 +173,72 @@ var mqtt_send = require('mqtt');
 var client_send_a = mqtt_send.connect('mqtt://127.0.0.1');
 var client_send_b = mqtt_send.connect('mqtt://127.0.0.1');
 
-function publishGateIn(ptopic, pclientID, pticket){
+function publishGateIn(ptopic, pclientID, pticket, pdesname, pdesemailnotice, pdata, pdesmessage){
 	
 	var msg = "Cliente: " + pclientID + " - Mensagem: " + pticket;
 	
-	enviarEmailREsponsavel();
+	if (pdesmessage == "LIBERAR_ENTRADA" || pdesmessage == "LIBERAR_SAIDA"){
+		
+		if (pdesmessage == "LIBERAR_ENTRADA")
+			pdesmessage = "Entrada Liberada";
+		
+		if (pdesmessage == "LIBERAR_SAIDA")
+			pdesmessage = "Saída Liberada";		
+			
+		enviarEmailREsponsavel(pdesname, pdesemailnotice, pdata, pdesmessage);
+		
+	}
 	
 	client_send_a.publish(ptopic, msg);		
 	
 }
 
-function publishGateOut(ptopic, pclientID, pticket){
+function publishGateOut(ptopic, pclientID, pticket, pdesname, pdesemailnotice, pdata, pdesmessage){
 	
 	var msg ="Cliente: " + pclientID + " - Mensagem: " + pticket;
 	
-	enviarEmailREsponsavel();
+	if (pdesmessage == "LIBERAR_ENTRADA" || pdesmessage == "LIBERAR_SAIDA"){
+		
+		if (pdesmessage == "LIBERAR_ENTRADA")
+			pdesmessage = "Entrada";
+		
+		if (pdesmessage == "LIBERAR_SAIDA")
+			pdesmessage = "Saída";	
+		
+		enviarEmailREsponsavel(pdesname, pdesemailnotice, pdata, pdesmessage);
+		
+	}
 	
 	client_send_b.publish(ptopic, msg);	
 	
 }
 
-function enviarEmailREsponsavel(){
-	//href = 'http://egate.com/emailteste.php';
+function enviarEmailREsponsavel(pdesname, pdesemailnotice, pdata, pdesmessage){
 	
 	var request = require('request');
 
 	// Set the headers
 	var headers = {
-		'User-Agent':       'Super Agent/0.0.1',
-		'Content-Type':     'application/x-www-form-urlencoded'
+		'User-Agent':'Super Agent/0.0.1',
+		'Content-Type':'application/x-www-form-urlencoded'
 	}
 
 	// Configure the request
 	var options = {
-		url: 'http://egate.com/emailteste.php'
+		url: 'http://egate.com/emailsentserver.php'
 		,method: 'GET'
 		,headers: headers
-		//,qs: {'key1': 'xxx', 'key2': 'yyy'}
+		,qs: {'status': pdesmessage, 'estudante': pdesname, 'datareg': pdata, 'emailnotice': pdesemailnotice}
 	}
 
 	// Start the request
 	request(options, function (error, response, body) {
 		
 		if (!error && response.statusCode == 200) {
-			//console.log(body);
-			console.log("Executar com sucesso o arquivo do email");
+			console.log("Sent e-mail Sucess");
 			
 		}else{
-			console.log("Error ao executar o arquivo do email");
+			console.log("Fail e-mail");
 			
 		}
 	});
