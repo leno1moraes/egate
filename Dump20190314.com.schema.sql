@@ -113,7 +113,7 @@ CREATE TABLE `tb_registrygate` (
   CONSTRAINT `fk_action` FOREIGN KEY (`iaction`) REFERENCES `tb_action` (`id`),
   CONSTRAINT `fk_gate` FOREIGN KEY (`gate`) REFERENCES `tb_gate` (`id`),
   CONSTRAINT `fk_student` FOREIGN KEY (`student`) REFERENCES `tb_student` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `tb_registrygate` (
 
 LOCK TABLES `tb_registrygate` WRITE;
 /*!40000 ALTER TABLE `tb_registrygate` DISABLE KEYS */;
-INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1,'LIBERAR_ENTRADA'),(2,1,'2019-03-14 17:29:51',3,2,'LIBERAR_ENTRADA'),(8,1,'2019-03-15 18:25:09',1,1,'LIBERAR_ENTRADA'),(9,1,'2019-03-15 21:29:16',3,2,'LIBERAR_ENTRADA'),(10,1,'2019-03-15 21:32:20',1,1,'LIBERAR_ENTRADA'),(11,1,'2019-03-15 21:33:23',3,2,'LIBERAR_ENTRADA'),(12,1,'2019-03-15 21:33:57',1,1,'LIBERAR_ENTRADA'),(13,1,'2019-03-15 21:34:01',3,2,'LIBERAR_ENTRADA'),(14,1,'2019-03-15 21:47:38',1,1,'LIBERAR_ENTRADA'),(15,1,'2019-03-15 21:48:06',1,1,'BLOQUEADO'),(16,1,'2019-03-15 21:48:39',3,2,'LIBERAR_SAIDA'),(17,1,'2019-03-15 22:00:57',1,1,'LIBERAR_ENTRADA'),(18,1,'2019-03-15 22:01:01',1,1,'BLOQUEADO'),(19,1,'2019-03-15 22:01:12',3,2,'LIBERAR_SAIDA'),(20,1,'2019-03-15 22:05:52',3,2,'BLOQUEADO'),(21,1,'2019-03-15 22:05:55',1,1,'LIBERAR_ENTRADA'),(22,1,'2019-03-15 22:05:59',3,2,'LIBERAR_SAIDA');
+INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1,'LIBERAR_ENTRADA'),(2,1,'2019-03-14 17:29:51',3,2,'LIBERAR_ENTRADA'),(8,1,'2019-03-15 18:25:09',1,1,'LIBERAR_ENTRADA'),(9,1,'2019-03-15 21:29:16',3,2,'LIBERAR_ENTRADA'),(10,1,'2019-03-15 21:32:20',1,1,'LIBERAR_ENTRADA'),(11,1,'2019-03-15 21:33:23',3,2,'LIBERAR_ENTRADA'),(12,1,'2019-03-15 21:33:57',1,1,'LIBERAR_ENTRADA'),(13,1,'2019-03-15 21:34:01',3,2,'LIBERAR_ENTRADA'),(14,1,'2019-03-15 21:47:38',1,1,'LIBERAR_ENTRADA'),(15,1,'2019-03-15 21:48:06',1,1,'BLOQUEADO'),(16,1,'2019-03-15 21:48:39',3,2,'LIBERAR_SAIDA'),(17,1,'2019-03-15 22:00:57',1,1,'LIBERAR_ENTRADA'),(18,1,'2019-03-15 22:01:01',1,1,'BLOQUEADO'),(19,1,'2019-03-15 22:01:12',3,2,'LIBERAR_SAIDA'),(20,1,'2019-03-15 22:05:52',3,2,'BLOQUEADO'),(21,1,'2019-03-15 22:05:55',1,1,'LIBERAR_ENTRADA'),(22,1,'2019-03-15 22:05:59',3,2,'LIBERAR_SAIDA'),(23,1,'2019-03-18 15:39:51',3,2,'BLOQUEADO'),(24,1,'2019-03-18 15:39:56',1,1,'LIBERAR_ENTRADA'),(25,1,'2019-03-18 15:40:01',3,2,'LIBERAR_SAIDA'),(26,1,'2019-03-18 15:40:07',3,2,'BLOQUEADO'),(27,1,'2019-03-18 19:09:09',1,1,'LIBERAR_ENTRADA'),(28,1,'2019-03-18 19:09:37',1,1,'BLOQUEADO'),(29,1,'2019-03-18 19:11:30',1,1,'BLOQUEADO'),(30,1,'2019-03-18 19:11:53',1,1,'BLOQUEADO'),(31,1,'2019-03-18 19:16:44',3,2,'LIBERAR_SAIDA'),(32,1,'2019-03-18 19:17:44',3,2,'BLOQUEADO'),(33,1,'2019-03-18 19:17:51',1,1,'LIBERAR_ENTRADA'),(34,1,'2019-03-18 19:21:11',1,1,'BLOQUEADO'),(35,1,'2019-03-18 19:21:20',3,2,'LIBERAR_SAIDA'),(36,1,'2019-03-18 19:22:28',3,2,'BLOQUEADO'),(37,1,'2019-03-18 19:22:44',1,1,'LIBERAR_ENTRADA'),(38,1,'2019-03-18 19:48:06',1,1,'BLOQUEADO'),(39,1,'2019-03-19 09:24:26',3,2,'LIBERAR_SAIDA'),(40,1,'2019-03-19 09:29:36',1,1,'LIBERAR_ENTRADA');
 /*!40000 ALTER TABLE `tb_registrygate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -438,6 +438,30 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `teste_aquivo_php` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `teste_aquivo_php`()
+BEGIN
+
+ DECLARE cmd CHAR(255);
+ DECLARE result CHAR(255);
+ SET cmd = CONCAT('C:/xampp/php/php.exe -f "C:/egate/emailteste.php" ');
+ SET result = sys_eval(cmd);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -448,4 +472,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-15 22:07:29
+-- Dump completed on 2019-03-19  9:33:06
