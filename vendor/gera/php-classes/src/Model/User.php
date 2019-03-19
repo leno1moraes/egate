@@ -9,6 +9,7 @@ class User extends Model {
 
     const SUCCESS = "UserSuccess";
     const ERROR = "UserError";
+    const FAILLOGIN = "UserLogin";
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     public static function setSuccess($msg){
@@ -134,6 +135,41 @@ class User extends Model {
         $this->setData($results[0]);
 
     }
+
+    public static function doLogin($login, $password){
+
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT * FROM tb_user u WHERE u.deslogin = :login and despassword = :password", array(
+            ":login"=>$login,
+            ":password"=>$password
+        ));
+        
+        if (count($results) === 0){
+            return false;
+
+        }else{
+            return true;
+        }
+    }
+
+    public static function setFailLogin($msg){
+        $_SESSION[User::FAILLOGIN] = $msg;
+    }
+
+    public static function clearFailLogin(){
+        $_SESSION[User::FAILLOGIN] = NULL;
+    }
+
+    public static function getFailLogin(){        
+        $msg = (isset($_SESSION[User::FAILLOGIN]) && $_SESSION[User::FAILLOGIN]) ? $_SESSION[User::FAILLOGIN] : "";
+
+        User::clearFailLogin();
+
+        return $msg;
+    }    
+
+
 
 }
 

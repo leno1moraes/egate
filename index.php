@@ -340,6 +340,38 @@ $app->get('/admin/users', function() {
     
 });
 
+$app->post('/admin/login', function() {
+    
+    $login = (isset($_GET['login'])) ? $_GET['login'] : "";    
+    $password = (isset($_GET['password'])) ? $_GET['password'] : "";
+
+    
+    if ($login === "" || $password === ""){
+        User::clearFailLogin();
+
+        User::setFailLogin("Preencha o login e senha");
+
+        header("Location: /");
+        exit;
+    }
+
+    if (!User::doLogin($login, $password)){
+        User::clearFailLogin();
+
+        User::setFailLogin("Usuário inexistente ou senha incorreta, por favor verifique");
+
+        header("Location: /");
+        exit;
+    }
+
+    
+
+
+
+});
+
+
+
 $app->get('/admin', function() {
 
 	$page = new Page();
@@ -355,7 +387,9 @@ $app->get('/', function() {
 		"footer"=>false
 	]);
 
-	$page->setTpl("login");
+	$page->setTpl("login", [
+        'msgError'=>User::getFailLogin()
+    ]);
     
 });
 

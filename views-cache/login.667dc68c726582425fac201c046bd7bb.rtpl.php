@@ -29,17 +29,25 @@
   <div class="login-logo">
     <a href="#"><b>e-</b>Gate</a>
   </div>
+
+  <?php if( $msgError != '' ){ ?>
+  <div class="alert alert-danger alert-dismissible" style="margin:10px">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <p><?php echo htmlspecialchars( $msgError, ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+  </div>
+  <?php } ?>
+  
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Por favor, fa&ccedila o login</p>
 
     <form action="/admin/login" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Login" name="login">
+        <input type="text" class="form-control" placeholder="Login" id="login" name="login">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="password">
+        <input type="password" class="form-control" placeholder="Password" id="password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
