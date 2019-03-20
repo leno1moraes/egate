@@ -36,7 +36,7 @@
       <p><?php echo htmlspecialchars( $msgError, ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
   </div>
   <?php } ?>
-  
+
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Por favor, fa&ccedila o login</p>

@@ -3,6 +3,7 @@
 namespace Geral;
 
 use Rain\Tpl;
+use \Geral\Model\User;
 
 class page {
 	private $tpl;
@@ -14,7 +15,7 @@ class page {
 	];
 
 	public function __construct($opts = array(), $tpl_dir = "/views/"){
-		
+
 		$this->options = array_merge($this->defaults, $opts);
 
 		// config
@@ -33,7 +34,7 @@ class page {
 
 		if ($this->options["header"] === true)
 			$this->tpl->draw("header");
-
+		
 	}
 
 	private function setData($data = array()){

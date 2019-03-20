@@ -18,6 +18,8 @@ require_once("functions.php");
 /********************************* Inicio Rotas **********************************/
 /*********************************************************************************/
 
+$nameuser = "";
+
 $app->post('/admin/users/password/:id', function($id) {
 
     if (!isset($_POST['despassword']) || $_POST['despassword'] === ''){
@@ -57,7 +59,11 @@ $app->get('/admin/users/password/:id', function($id) {
 
     $user->get((int)$id);    
 
-    $page = new Page();
+    $page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
 
 	$page->setTpl("users-password",[
         "user"=>$user->getValues(),
@@ -73,7 +79,11 @@ $app->get('/admin/student/update/:id', function($id) {
 
     $student->get((int)$id);    
 
-    $page = new Page();
+    $page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
 
 	$page->setTpl("student-update",[
         "student"=>$student->getValues()
@@ -147,7 +157,11 @@ $app->get('/admin/users/update/:id', function($id) {
 
     $user->get((int)$id);    
 
-    $page = new Page();
+    $page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
 
 	$page->setTpl("users-update",[
         "user"=>$user->getValues()
@@ -179,8 +193,7 @@ $app->post('/admin/users/update/:id', function($id) {
         exit;*/        
         if ($_POST['fident']  === "1")
             $_POST['desurl'] = 0;
-    }
-         
+    }         
 
     $user->setData($_POST);
 
@@ -222,7 +235,11 @@ $app->post('/admin/student/create', function() {
 
 $app->get('/admin/student/create', function() {
 
-	$page = new Page();
+	$page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
 
     $page->setTpl("student-create");
         
@@ -230,15 +247,11 @@ $app->get('/admin/student/create', function() {
 
 $app->get('/admin/users/create', function() {
 
-	$page = new Page();
-
-    /*
-    $user = new User();
-    $_POST['id'] = 0;    
-    $user->setData($_POST);
-    $user->save();
-    if($_FILES["file"]["name"] !== "")
-        $user->setPhoto($_FILES["file"]);*/
+	$page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
     
     $page->setTpl("users-create");
     
@@ -275,10 +288,7 @@ $app->get('/admin/painelcontrol', function() {
 	]);
 
     $page->setTpl("painel-control");
-     
-	/*$page->setTpl("painel-control", [
-        'loglive'=>Loglive::getLive()
-    ])*/   
+
 });
 
 
@@ -307,11 +317,12 @@ $app->get('/admin/log', function() {
         ]);
     }
 
-	$page = new Page();
+	$page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
 
-	/*$page->setTpl("loglistregistrygate",[
-		'log'=>Gate::listAll()
-    ]);*/
 	$page->setTpl("loglistregistrygate",[
         "log"=>$pagination['data'],
         "search"=>$search,
@@ -322,7 +333,11 @@ $app->get('/admin/log', function() {
 
 $app->get('/admin/students', function() {
 
-	$page = new Page();
+	$page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
 
 	$page->setTpl("students",[
 		'students'=>Student::listAll()
@@ -332,7 +347,11 @@ $app->get('/admin/students', function() {
 
 $app->get('/admin/users', function() {
 
-	$page = new Page();
+	$page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
 
 	$page->setTpl("users",[
 		'users'=>User::listAll()
@@ -342,12 +361,10 @@ $app->get('/admin/users', function() {
 
 $app->post('/admin/login', function() {
     
-    $login = (isset($_GET['login'])) ? $_GET['login'] : "";    
-    $password = (isset($_GET['password'])) ? $_GET['password'] : "";
-
+    $login = (isset($_POST['login'])) ? $_POST['login'] : "";    
+    $password = (isset($_POST['password'])) ? $_POST['password'] : "";
     
     if ($login === "" || $password === ""){
-        User::clearFailLogin();
 
         User::setFailLogin("Preencha o login e senha");
 
@@ -356,7 +373,6 @@ $app->post('/admin/login', function() {
     }
 
     if (!User::doLogin($login, $password)){
-        User::clearFailLogin();
 
         User::setFailLogin("Usuário inexistente ou senha incorreta, por favor verifique");
 
@@ -364,9 +380,8 @@ $app->post('/admin/login', function() {
         exit;
     }
 
-    
-
-
+    header("Location: /admin");
+    exit;    
 
 });
 
@@ -374,7 +389,11 @@ $app->post('/admin/login', function() {
 
 $app->get('/admin', function() {
 
-	$page = new Page();
+	$page = new Page(array(
+        "data"=>array(
+            'nameuser'=>User::getDesnameUser()
+        )
+    ));
 
 	$page->setTpl("index");
     

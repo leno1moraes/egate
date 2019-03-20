@@ -17,11 +17,16 @@
 
   <!-- Your Page Content Here -->
 
+  <?php if( $nameuser != '' ){ ?>
+  <p><?php echo htmlspecialchars( $nameuser, ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+  <?php } ?>  
+
   <p style="margin: 130px 0px 0px 0px; font-style: italic; font-size: 100px;" align="center">
 
       <span class="logo-lg"><b>e-</b>Gate</span>
 
   </p>
+  
   
 
 </section>

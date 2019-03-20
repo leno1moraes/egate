@@ -10,6 +10,7 @@ class User extends Model {
     const SUCCESS = "UserSuccess";
     const ERROR = "UserError";
     const FAILLOGIN = "UserLogin";
+    const DESNAMEUSER = "UserDesname";
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     public static function setSuccess($msg){
@@ -136,11 +137,13 @@ class User extends Model {
 
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static function doLogin($login, $password){
 
         $sql = new Sql();
 
-        $results = $sql->select("SELECT * FROM tb_user u WHERE u.deslogin = :login and despassword = :password", array(
+        $results = $sql->select("SELECT u.id, u.desnome FROM tb_user u WHERE u.deslogin = :login and despassword = :password", array(
             ":login"=>$login,
             ":password"=>$password
         ));
@@ -149,9 +152,18 @@ class User extends Model {
             return false;
 
         }else{
+            /*var_dump($results[0]['desnome']);
+            exit;*/
+
+            $_SESSION[User::DESNAMEUSER] = $results[0]['desnome'];            
             return true;
         }
+    }   
+        
+    public static function getDesnameUser(){
+        return $_SESSION[User::DESNAMEUSER];
     }
+
 
     public static function setFailLogin($msg){
         $_SESSION[User::FAILLOGIN] = $msg;
@@ -168,7 +180,8 @@ class User extends Model {
 
         return $msg;
     }    
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
 
 }
