@@ -93,18 +93,33 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="/res/admin/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <!--<img src="/res/admin/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
+              <?php if( $iduser != '' ){ ?>
+                <img src="/res/photo-profile/profile-<?php echo htmlspecialchars( $iduser, ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" class="user-image" alt="User Image">
+              <?php } ?>                
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce Direita</span>
+              <!--<span class="hidden-xs">Name User Here</span>-->
+              <?php if( $nameuser != '' ){ ?>
+              <span class="hidden-xs"><?php echo htmlspecialchars( $nameuser, ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+              <?php } ?> 
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="/res/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                <!--<img src="/res/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
+                <?php if( $iduser != '' ){ ?>
+                  <img src="/res/photo-profile/profile-<?php echo htmlspecialchars( $iduser, ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" class="img-circle" alt="User Image">
+                <?php } ?>                   
+                <!--
                 <p>
-                  Alexander Pierce - Web Developer
+                  Name User Here - Function User Here dude
                 </p>
+                -->
+                <?php if( $nameuser != '' ){ ?>
+                <p>
+                  <?php echo htmlspecialchars( $nameuser, ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                </p>                
+                <?php } ?>
               </li>
 
 
@@ -121,7 +136,7 @@ desired effect
                 -->
 
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sair</a>
+                  <a href="/admin/logout" class="btn btn-default btn-flat">Sair</a>
                 </div>
               </li>
             </ul>
@@ -149,17 +164,18 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/res/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <!--<img src="/res/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
+          <?php if( $iduser != '' ){ ?>
+            <img src="/res/photo-profile/profile-<?php echo htmlspecialchars( $iduser, ENT_COMPAT, 'UTF-8', FALSE ); ?>.jpg" class="img-circle" alt="User Image">
+          <?php } ?>          
         </div>
         <div class="pull-left info">
-
 
           <?php if( $nameuser != '' ){ ?>
             <p><?php echo htmlspecialchars( $nameuser, ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
           <?php } ?> 
 
-          <!-- <p>Alexander Pierce esquerda</p>-->
-                    
+          <!-- <p>Name ser Here</p>-->                    
           <!-- Status -->
           <!--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
         </div>

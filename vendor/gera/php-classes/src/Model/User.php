@@ -11,6 +11,7 @@ class User extends Model {
     const ERROR = "UserError";
     const FAILLOGIN = "UserLogin";
     const DESNAMEUSER = "UserDesname";
+    const IDUSER = "UserId";
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     public static function setSuccess($msg){
@@ -155,7 +156,8 @@ class User extends Model {
             /*var_dump($results[0]['desnome']);
             exit;*/
 
-            $_SESSION[User::DESNAMEUSER] = $results[0]['desnome'];            
+            $_SESSION[User::DESNAMEUSER] = $results[0]['desnome'];
+            $_SESSION[User::IDUSER] = $results[0]['id'];
             return true;
         }
     }   
@@ -164,6 +166,35 @@ class User extends Model {
         return $_SESSION[User::DESNAMEUSER];
     }
 
+    public static function getIdUser(){
+        return $_SESSION[User::IDUSER];
+    }
+
+    public static function logout(){
+        $_SESSION[User::IDUSER] = NULL;
+        $_SESSION[User::DESNAMEUSER] = NULL;
+    }
+
+    public static function checkLogin(){
+
+        if (!isset($_SESSION[User::IDUSER]) && !isset($_SESSION[User::DESNAMEUSER])){
+
+            return false;
+
+        }else{
+
+            return true;
+
+        }
+    }
+
+    public static function verifyLogin(){
+
+        if (!User::checkLogin()){
+            header("Location: /");
+            exit; 
+        }
+    }
 
     public static function setFailLogin($msg){
         $_SESSION[User::FAILLOGIN] = $msg;

@@ -54,6 +54,7 @@ $app->post('/admin/users/password/:id', function($id) {
 });
 
 $app->get('/admin/users/password/:id', function($id) {
+    User::verifyLogin();
 
     $user = new User();
 
@@ -61,7 +62,8 @@ $app->get('/admin/users/password/:id', function($id) {
 
     $page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
 
@@ -74,6 +76,7 @@ $app->get('/admin/users/password/:id', function($id) {
 });
 
 $app->get('/admin/student/update/:id', function($id) {
+    User::verifyLogin();
 
     $student = new Student();
 
@@ -81,7 +84,8 @@ $app->get('/admin/student/update/:id', function($id) {
 
     $page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
 
@@ -126,6 +130,7 @@ $app->post('/admin/student/update/:id', function($id) {
 });
 
 $app->get('/admin/student/delete/:id', function($id) {
+    User::verifyLogin();
 
     $student = new Student();
 
@@ -139,6 +144,7 @@ $app->get('/admin/student/delete/:id', function($id) {
 });
 
 $app->get('/admin/users/delete/:id', function($id) {
+    User::verifyLogin();
 
     $user = new User();
 
@@ -152,6 +158,7 @@ $app->get('/admin/users/delete/:id', function($id) {
 });
 
 $app->get('/admin/users/update/:id', function($id) {
+    User::verifyLogin();
 
     $user = new User();
 
@@ -159,7 +166,8 @@ $app->get('/admin/users/update/:id', function($id) {
 
     $page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
 
@@ -234,10 +242,12 @@ $app->post('/admin/student/create', function() {
 });
 
 $app->get('/admin/student/create', function() {
+    User::verifyLogin();
 
 	$page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
 
@@ -246,10 +256,12 @@ $app->get('/admin/student/create', function() {
 });
 
 $app->get('/admin/users/create', function() {
+    User::verifyLogin();
 
 	$page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
     
@@ -280,7 +292,8 @@ $app->post('/admin/users/create', function() {
     
 });
 
-$app->get('/admin/painelcontrol', function() {    
+$app->get('/admin/painelcontrol', function() { 
+    User::verifyLogin();   
 
 	$page = new Page([
 		"header"=>false,
@@ -293,6 +306,7 @@ $app->get('/admin/painelcontrol', function() {
 
 
 $app->get('/admin/log', function() {
+    User::verifyLogin();
 
     $search = (isset($_GET['search'])) ? $_GET['search'] : "";
     $page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
@@ -319,7 +333,8 @@ $app->get('/admin/log', function() {
 
 	$page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
 
@@ -332,10 +347,12 @@ $app->get('/admin/log', function() {
 });
 
 $app->get('/admin/students', function() {
+    User::verifyLogin();
 
 	$page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
 
@@ -346,10 +363,12 @@ $app->get('/admin/students', function() {
 });
 
 $app->get('/admin/users', function() {
+    User::verifyLogin();
 
 	$page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
 
@@ -385,13 +404,21 @@ $app->post('/admin/login', function() {
 
 });
 
+$app->get('/admin/logout', function() {
+    User::logout();
+
+    header("Location: /");
+    exit;     
+});
 
 
 $app->get('/admin', function() {
+    User::verifyLogin();
 
 	$page = new Page(array(
         "data"=>array(
-            'nameuser'=>User::getDesnameUser()
+            'nameuser'=>User::getDesnameUser(),
+            'iduser'=>User::getIdUser()
         )
     ));
 
