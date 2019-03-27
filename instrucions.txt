@@ -1,0 +1,14 @@
+Execute o MQTT
+
+	#SUBSCRIBE
+	===> CMD as ADM >> Go to path 'mosquitto' >> mosquitto_sub -h [localhost/ip host] -p [port] -t ["name of topic"]
+
+	#PUBLISH
+	===> CMD as ADM >> Go to path 'mosquitto' >> mosquitto_pub -h [localhost/ip host] -p [port] -t ["name of topic"] -m ["message"]
+
+	
+Execute Node JavaScript for Listten message MQTT
+
+	===> CMD as ADM >> Go to path 'C:\Program Files\nodejs\node_modules\npm\node_modules' >> node [name_javascript_file]
+
+
