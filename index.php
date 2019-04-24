@@ -292,6 +292,18 @@ $app->post('/admin/users/create', function() {
     
 });
 
+$app->get('/admin/painelcontroltag', function() { 
+    User::verifyLogin();   
+
+    $page = new Page([
+        "header"=>false,
+        "footer"=>false
+    ]);
+
+    $page->setTpl("painel-control-table-tag");
+
+});
+
 $app->get('/admin/painelcontrol', function() { 
     User::verifyLogin();   
 

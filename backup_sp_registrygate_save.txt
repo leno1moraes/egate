@@ -1,0 +1,75 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrygate_save`(
+pidgate VARCHAR(45),
+pidticket VARCHAR(45)
+)
+BEGIN
+    DECLARE RET_INT INT;
+    DECLARE ANSWER VARCHAR(45);
+    DECLARE IDSTUDENT INT;
+    DECLARE IDGATE INT;
+    DECLARE ASTATUS INT;
+    DECLARE FUNCTIONGATE VARCHAR(45);
+    DECLARE ACCESS INT;
+    
+	/*VERIFICAR SE O TICKET ESTÁ VINCULADO A UM ESTUDANTE*/
+    IF EXISTS (SELECT id FROM tb_student WHERE desid2 = pidticket) THEN
+		SET RET_INT = 1;        
+    ELSE
+		SET RET_INT = 0;        
+    END IF;	
+    
+    IF (RET_INT = 0) THEN
+		SET ANSWER = 'BLOQUEADO';
+        
+	ELSE
+		
+        SET IDSTUDENT = (SELECT id FROM tb_student WHERE desid2 = pidticket);
+        SET IDGATE = (SELECT id FROM tb_gate WHERE descode = pidgate);
+		SET FUNCTIONGATE = (SELECT iaction FROM tb_gate WHERE id = IDGATE);
+        SET ACCESS = (SELECT desstatus FROM tb_student WHERE id = IDSTUDENT);
+        
+		SET ASTATUS = ( SELECT c.iaction 
+						FROM tb_registrygate c
+						WHERE c.id = (SELECT MAX(a.id)
+									  FROM tb_registrygate a 
+									  INNER JOIN tb_action b ON a.iaction = b.id
+									  WHERE a.student = IDSTUDENT ));        
+        /*
+        1 - ENTRAR
+        3 - SAIR
+        */		
+        IF (FUNCTIONGATE = 1 AND ASTATUS = 3) THEN 
+            
+            IF (ACCESS = 1) THEN
+				SET ANSWER = 'LIBERAR_ENTRADA';
+                
+				INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+				VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);                
+                
+            ELSE
+				SET ANSWER = 'BLOQUEADO';
+                
+				INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+				VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);  
+                
+            END IF;
+            
+        ELSEIF (FUNCTIONGATE = 3 AND ASTATUS = 1) THEN 
+            
+            SET ANSWER = 'LIBERAR_SAIDA';
+            
+			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);  
+                
+        ELSE
+			SET ANSWER = 'BLOQUEADO';
+            
+			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);              
+            
+        END IF;
+        
+    END IF;
+    
+    SELECT ANSWER AS ANSWER;
+END

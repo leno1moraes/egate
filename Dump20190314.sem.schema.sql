@@ -111,7 +111,7 @@ CREATE TABLE `tb_registrygate` (
   CONSTRAINT `fk_action` FOREIGN KEY (`iaction`) REFERENCES `tb_action` (`id`),
   CONSTRAINT `fk_gate` FOREIGN KEY (`gate`) REFERENCES `tb_gate` (`id`),
   CONSTRAINT `fk_student` FOREIGN KEY (`student`) REFERENCES `tb_student` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,8 +120,33 @@ CREATE TABLE `tb_registrygate` (
 
 LOCK TABLES `tb_registrygate` WRITE;
 /*!40000 ALTER TABLE `tb_registrygate` DISABLE KEYS */;
-INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1,'LIBERAR_ENTRADA'),(2,1,'2019-03-14 17:29:51',3,2,'LIBERAR_ENTRADA'),(8,1,'2019-03-15 18:25:09',1,1,'LIBERAR_ENTRADA'),(9,1,'2019-03-15 21:29:16',3,2,'LIBERAR_ENTRADA'),(10,1,'2019-03-15 21:32:20',1,1,'LIBERAR_ENTRADA'),(11,1,'2019-03-15 21:33:23',3,2,'LIBERAR_ENTRADA'),(12,1,'2019-03-15 21:33:57',1,1,'LIBERAR_ENTRADA'),(13,1,'2019-03-15 21:34:01',3,2,'LIBERAR_ENTRADA'),(14,1,'2019-03-15 21:47:38',1,1,'LIBERAR_ENTRADA'),(15,1,'2019-03-15 21:48:06',1,1,'BLOQUEADO'),(16,1,'2019-03-15 21:48:39',3,2,'LIBERAR_SAIDA'),(17,1,'2019-03-15 22:00:57',1,1,'LIBERAR_ENTRADA'),(18,1,'2019-03-15 22:01:01',1,1,'BLOQUEADO'),(19,1,'2019-03-15 22:01:12',3,2,'LIBERAR_SAIDA'),(20,1,'2019-03-15 22:05:52',3,2,'BLOQUEADO'),(21,1,'2019-03-15 22:05:55',1,1,'LIBERAR_ENTRADA'),(22,1,'2019-03-15 22:05:59',3,2,'LIBERAR_SAIDA'),(23,1,'2019-03-18 15:39:51',3,2,'BLOQUEADO'),(24,1,'2019-03-18 15:39:56',1,1,'LIBERAR_ENTRADA'),(25,1,'2019-03-18 15:40:01',3,2,'LIBERAR_SAIDA'),(26,1,'2019-03-18 15:40:07',3,2,'BLOQUEADO'),(27,1,'2019-03-18 19:09:09',1,1,'LIBERAR_ENTRADA'),(28,1,'2019-03-18 19:09:37',1,1,'BLOQUEADO'),(29,1,'2019-03-18 19:11:30',1,1,'BLOQUEADO'),(30,1,'2019-03-18 19:11:53',1,1,'BLOQUEADO'),(31,1,'2019-03-18 19:16:44',3,2,'LIBERAR_SAIDA'),(32,1,'2019-03-18 19:17:44',3,2,'BLOQUEADO'),(33,1,'2019-03-18 19:17:51',1,1,'LIBERAR_ENTRADA'),(34,1,'2019-03-18 19:21:11',1,1,'BLOQUEADO'),(35,1,'2019-03-18 19:21:20',3,2,'LIBERAR_SAIDA'),(36,1,'2019-03-18 19:22:28',3,2,'BLOQUEADO'),(37,1,'2019-03-18 19:22:44',1,1,'LIBERAR_ENTRADA'),(38,1,'2019-03-18 19:48:06',1,1,'BLOQUEADO'),(39,1,'2019-03-19 09:24:26',3,2,'LIBERAR_SAIDA'),(40,1,'2019-03-19 09:29:36',1,1,'LIBERAR_ENTRADA');
+INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1,'LIBERAR_ENTRADA'),(52,1,'2019-04-24 01:53:48',3,1,'SAINDO/Nivalda Lemos'),(53,4,'2019-04-24 01:57:17',1,1,'ENTRANDO/Roberto Campus 3'),(54,4,'2019-04-24 02:02:10',3,1,'SAINDO/Roberto Campus 3'),(55,4,'2019-04-24 02:03:35',1,1,'ENTRANDO/Roberto Campus 3'),(56,4,'2019-04-24 02:07:10',3,1,'SAINDO/Roberto Campus 3'),(57,4,'2019-04-24 02:07:29',1,1,'ENTRANDO/Roberto Campus 3');
 /*!40000 ALTER TABLE `tb_registrygate` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_regtickets`
+--
+
+DROP TABLE IF EXISTS `tb_regtickets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_regtickets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ticket` varchar(45) NOT NULL,
+  `flag` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_regtickets`
+--
+
+LOCK TABLES `tb_regtickets` WRITE;
+/*!40000 ALTER TABLE `tb_regtickets` DISABLE KEYS */;
+INSERT INTO `tb_regtickets` VALUES (9,'e2f9ed39',1),(10,'811f5adc',1);
+/*!40000 ALTER TABLE `tb_regtickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -154,7 +179,7 @@ CREATE TABLE `tb_student` (
 
 LOCK TABLES `tb_student` WRITE;
 /*!40000 ALTER TABLE `tb_student` DISABLE KEYS */;
-INSERT INTO `tb_student` VALUES (1,'Nivalda Lemos','201913032222','03670726101','20191820QWE','6599986763','lenomoraes12@gmail.com',2,1,1),(3,'Sandra Farias 2','201913033444','03670726101','000000','6599986763','roberto@gmail.com',1,1,0),(4,'Roberto Campus 3','201913033333','03670726101','000000','6599986763','roberto@gmail.com',2,1,1);
+INSERT INTO `tb_student` VALUES (1,'Nivalda Lemos','201913032222','03670726101','e2f9ed39','6599986763','leno.moraes@lrv.ifmt.edu.br',2,1,1),(3,'Sandra Farias 2','201913033444','03670726101','','6599986763','roberto@gmail.com',1,1,0),(4,'Roberto Campus 3','201913033333','03670726101','811f5adc','6599986763','roberto@gmail.com',2,1,1);
 /*!40000 ALTER TABLE `tb_student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +250,7 @@ CREATE TABLE `tbl_messages` (
   `topic` varchar(45) DEFAULT NULL,
   `message` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=320 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +259,7 @@ CREATE TABLE `tbl_messages` (
 
 LOCK TABLES `tbl_messages` WRITE;
 /*!40000 ALTER TABLE `tbl_messages` DISABLE KEYS */;
-INSERT INTO `tbl_messages` VALUES (1,'ID1','enviarTicket','teste');
+INSERT INTO `tbl_messages` VALUES (1,'ID1','enviarTicket','teste'),(318,'client002','acessoEntrada','e2f9ed39'),(319,'client002','retornoEntrada','ENTRANDO/Leno');
 /*!40000 ALTER TABLE `tbl_messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,6 +270,33 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'egatedatabase'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `sp_insertticket_save` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertticket_save`(
+	pdesname varchar(45)
+)
+BEGIN
+	DECLARE RET_ID INT;    
+    
+    IF NOT EXISTS (select id from tb_regtickets where ticket = pdesname) THEN    
+		INSERT INTO tb_regtickets (ticket)
+		VALUES (pdesname);    
+    END IF;	    
+        
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_registrygate_save` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -281,8 +333,8 @@ BEGIN
 	ELSE
 		
         SET IDSTUDENT = (SELECT id FROM tb_student WHERE desid2 = pidticket);
-        SET IDGATE = (SELECT id FROM tb_gate WHERE descode = pidgate);
-		SET FUNCTIONGATE = (SELECT iaction FROM tb_gate WHERE id = IDGATE);
+        /*SET IDGATE = (SELECT id FROM tb_gate WHERE descode = pidgate);
+		SET FUNCTIONGATE = (SELECT iaction FROM tb_gate WHERE id = IDGATE);*/
         SET ACCESS = (SELECT desstatus FROM tb_student WHERE id = IDSTUDENT);
         
 		SET ASTATUS = ( SELECT c.iaction 
@@ -294,41 +346,119 @@ BEGIN
         /*
         1 - ENTRAR
         3 - SAIR
-        */		
-        IF (FUNCTIONGATE = 1 AND ASTATUS = 3) THEN 
+        */	
+        
+        
+        IF (ASTATUS = 3) THEN 
             
             IF (ACCESS = 1) THEN
-				SET ANSWER = 'LIBERAR_ENTRADA';
+				SET ANSWER = 'ENTRANDO';
                 
 				INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
-				VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);                
+				VALUES (IDSTUDENT, NOW(), 1, 1, ANSWER);                
                 
             ELSE
 				SET ANSWER = 'BLOQUEADO';
                 
-				INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
-				VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);  
+				/*INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+				VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, 1, ANSWER);*/  
                 
             END IF;
             
-        ELSEIF (FUNCTIONGATE = 3 AND ASTATUS = 1) THEN 
+        ELSEIF (ASTATUS = 1) THEN 
             
-            SET ANSWER = 'LIBERAR_SAIDA';
+            SET ANSWER = 'SAINDO';
             
 			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
-			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);  
+			VALUES (IDSTUDENT, NOW(), 3, 1, ANSWER);  
                 
         ELSE
 			SET ANSWER = 'BLOQUEADO';
             
-			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
-			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);              
+			/*INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+			VALUES (IDSTUDENT, NOW(), FUNCTIONGATE, IDGATE, ANSWER);*/              
             
         END IF;
         
     END IF;
     
     SELECT ANSWER AS ANSWER;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_registrygate_save2` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registrygate_save2`(
+pidticket VARCHAR(45)
+)
+BEGIN
+	DECLARE answer VARCHAR(45);
+    DECLARE ID_ESTUDANTE INT;
+	DECLARE STATUS_ENTRADA_SAIDA INT;
+    DECLARE NAME_ESTUDANTE VARCHAR(45);
+    
+    IF EXISTS (SELECT id FROM tb_student WHERE desid2 = pidticket) THEN
+    
+		SET ID_ESTUDANTE = (SELECT id FROM tb_student WHERE desid2 = pidticket);
+        SET NAME_ESTUDANTE = (SELECT desname FROM tb_student WHERE id = ID_ESTUDANTE);
+        SET STATUS_ENTRADA_SAIDA = ( SELECT c.iaction 
+									FROM tb_registrygate c
+									WHERE c.id = (SELECT MAX(a.id)
+												  FROM tb_registrygate a 
+												  INNER JOIN tb_action b ON a.iaction = b.id
+												  WHERE a.student = ID_ESTUDANTE ));        
+        /*
+        1 - ENTROU
+        3 - SAIU
+        */ 
+        
+        
+        
+        IF (STATUS_ENTRADA_SAIDA = 1) THEN
+			
+            SET answer = (SELECT CONCAT('SAINDO', '/', NAME_ESTUDANTE));
+            
+			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+			VALUES (ID_ESTUDANTE, NOW(), 3, 1, answer);               
+        
+        ELSEIF (STATUS_ENTRADA_SAIDA = 3) THEN
+			
+			SET answer = (SELECT CONCAT('ENTRANDO', '/', NAME_ESTUDANTE));
+             
+			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+			VALUES (ID_ESTUDANTE, NOW(), 1, 1, answer);            
+            
+		ELSE
+        
+			SET answer = (SELECT CONCAT('ENTRANDO', '/', NAME_ESTUDANTE));
+             
+			INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+			VALUES (ID_ESTUDANTE, NOW(), 1, 1, answer);   
+            
+        END IF;        
+        
+    ELSE
+		
+        SET answer = "ACESSONEGADO/Nao Vinculado";
+        
+		INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+		VALUES (0, NOW(), 0, 0, answer);        
+		        
+    END IF;
+    
+    SELECT answer AS answer;
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -381,6 +511,8 @@ BEGIN
 		SET pid = LAST_INSERT_ID(); 
 	
     END IF;
+    
+    UPDATE tb_regtickets SET flag = 1 WHERE ticket = pdesid2;
     
     SELECT * FROM tb_student WHERE id = pid;
 END ;;
@@ -470,4 +602,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-19  9:33:36
+-- Dump completed on 2019-04-24  8:38:03
