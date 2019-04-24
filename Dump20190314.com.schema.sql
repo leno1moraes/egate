@@ -113,7 +113,7 @@ CREATE TABLE `tb_registrygate` (
   CONSTRAINT `fk_action` FOREIGN KEY (`iaction`) REFERENCES `tb_action` (`id`),
   CONSTRAINT `fk_gate` FOREIGN KEY (`gate`) REFERENCES `tb_gate` (`id`),
   CONSTRAINT `fk_student` FOREIGN KEY (`student`) REFERENCES `tb_student` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `tb_registrygate` (
 
 LOCK TABLES `tb_registrygate` WRITE;
 /*!40000 ALTER TABLE `tb_registrygate` DISABLE KEYS */;
-INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1,'LIBERAR_ENTRADA'),(52,1,'2019-04-24 01:53:48',3,1,'SAINDO/Nivalda Lemos'),(53,4,'2019-04-24 01:57:17',1,1,'ENTRANDO/Roberto Campus 3'),(54,4,'2019-04-24 02:02:10',3,1,'SAINDO/Roberto Campus 3'),(55,4,'2019-04-24 02:03:35',1,1,'ENTRANDO/Roberto Campus 3'),(56,4,'2019-04-24 02:07:10',3,1,'SAINDO/Roberto Campus 3'),(57,4,'2019-04-24 02:07:29',1,1,'ENTRANDO/Roberto Campus 3');
+INSERT INTO `tb_registrygate` VALUES (1,1,'2019-03-14 17:28:11',1,1,'LIBERAR_ENTRADA'),(58,1,'2019-04-24 09:04:16',3,1,'SAINDO/Nivalda Lemos'),(59,4,'2019-04-24 09:11:12',1,1,'ENTRANDO/Roberto Campus 3'),(60,4,'2019-04-24 09:12:39',3,1,'SAINDO/Roberto Campus 3'),(61,4,'2019-04-24 09:16:50',1,1,'ENTRANDO/Roberto Campus 3'),(62,1,'2019-04-24 09:36:04',1,1,'ENTRANDO/Nivalda Lemos'),(63,1,'2019-04-24 09:48:03',3,1,'SAINDO/Nivalda Lemos'),(64,1,'2019-04-24 09:48:15',1,1,'ENTRANDO/Nivalda Lemos'),(65,4,'2019-04-24 09:50:16',3,1,'SAINDO/Roberto Campus 3'),(66,4,'2019-04-24 09:50:59',1,1,'ENTRANDO/Roberto Campus 3'),(67,1,'2019-04-24 09:51:12',3,1,'SAINDO/Nivalda Lemos'),(68,1,'2019-04-24 09:51:38',1,1,'ENTRANDO/Nivalda Lemos'),(69,1,'2019-04-24 09:52:45',3,1,'SAINDO/Nivalda Lemos'),(70,4,'2019-04-24 09:52:56',3,1,'SAINDO/Roberto Campus 3'),(71,4,'2019-04-24 09:53:06',1,1,'ENTRANDO/Roberto Campus 3'),(72,1,'2019-04-24 09:53:21',1,1,'ENTRANDO/Nivalda Lemos'),(75,1,'2019-04-24 10:09:22',3,1,'SAINDO/Nivalda Lemos'),(76,1,'2019-04-24 10:15:12',1,1,'ENTRANDO/Nivalda Lemos'),(77,4,'2019-04-24 10:38:26',3,1,'SAINDO/Roberto Campus 3'),(78,4,'2019-04-24 10:38:37',1,1,'ENTRANDO/Roberto Campus 3'),(79,1,'2019-04-24 10:38:45',3,1,'SAINDO/Nivalda Lemos'),(80,4,'2019-04-24 10:39:12',3,1,'SAINDO/Roberto Campus 3'),(81,1,'2019-04-24 10:39:29',1,1,'ENTRANDO/Nivalda Lemos'),(82,1,'2019-04-24 10:39:59',3,1,'SAINDO/Nivalda Lemos'),(83,1,'2019-04-24 10:40:15',1,1,'ENTRANDO/Nivalda Lemos'),(84,4,'2019-04-24 10:42:54',1,1,'ENTRANDO/Roberto Campus 3'),(85,1,'2019-04-24 10:44:16',3,1,'SAINDO/Nivalda Lemos'),(86,1,'2019-04-24 11:07:37',1,1,'ENTRANDO/Nivalda Lemos'),(87,4,'2019-04-24 11:12:35',3,1,'SAINDO/Roberto Campus 3'),(88,4,'2019-04-24 11:32:25',1,1,'ENTRANDO/Roberto Campus 3'),(89,3,'2019-04-24 11:54:29',1,1,'ENTRANDO/Angelica Maria'),(90,3,'2019-04-24 11:54:38',3,1,'SAINDO/Angelica Maria');
 /*!40000 ALTER TABLE `tb_registrygate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `tb_regtickets` (
   `ticket` varchar(45) NOT NULL,
   `flag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `tb_regtickets` (
 
 LOCK TABLES `tb_regtickets` WRITE;
 /*!40000 ALTER TABLE `tb_regtickets` DISABLE KEYS */;
-INSERT INTO `tb_regtickets` VALUES (9,'e2f9ed39',1),(10,'811f5adc',1);
+INSERT INTO `tb_regtickets` VALUES (9,'e2f9ed39',1),(10,'811f5adc',1),(18,'316218dc',1);
 /*!40000 ALTER TABLE `tb_regtickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +181,7 @@ CREATE TABLE `tb_student` (
 
 LOCK TABLES `tb_student` WRITE;
 /*!40000 ALTER TABLE `tb_student` DISABLE KEYS */;
-INSERT INTO `tb_student` VALUES (1,'Nivalda Lemos','201913032222','03670726101','e2f9ed39','6599986763','leno.moraes@lrv.ifmt.edu.br',2,1,1),(3,'Sandra Farias 2','201913033444','03670726101','','6599986763','roberto@gmail.com',1,1,0),(4,'Roberto Campus 3','201913033333','03670726101','811f5adc','6599986763','roberto@gmail.com',2,1,1);
+INSERT INTO `tb_student` VALUES (1,'Nivalda Lemos','201913032222','03670726101','e2f9ed39','6599986763','leno.moraes@lrv.ifmt.edu.br',2,1,1),(3,'Angelica Maria','201913033444','03670726101','316218dc','6599986763','roberto@gmail.com',1,1,0),(4,'Roberto Campus 3','201913033333','03670726101','811f5adc','6599986763','roberto@gmail.com',2,1,1);
 /*!40000 ALTER TABLE `tb_student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `tb_user` (
 
 LOCK TABLES `tb_user` WRITE;
 /*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
-INSERT INTO `tb_user` VALUES (2,'leno',1,'2019-03-12 00:00:00','Leno Grazianny 4',1,'lenomoraes12@gmail.com','123'),(8,'admin',1,'2019-03-13 03:01:44','Administrador 3',1,'adm@gmail.com','admin');
+INSERT INTO `tb_user` VALUES (2,'leno',1,'2019-03-12 00:00:00','Leno Grazianny',1,'lenomoraes12@gmail.com','123'),(8,'admin',1,'2019-03-13 03:01:44','Administrador 3',1,'adm@gmail.com','admin');
 /*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,10 +452,10 @@ BEGIN
         
     ELSE
 		
-        SET answer = "ACESSONEGADO/Nao Vinculado";
+        SET answer = "ACESSONEGADO/Nao_Vinculado";
         
-		INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
-		VALUES (0, NOW(), 0, 0, answer);        
+		/*INSERT INTO tb_registrygate (student, data, iaction, gate, desmessage)
+		VALUES (0, NOW(), 0, 0, answer);        */
 		        
     END IF;
     
@@ -604,4 +604,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  8:38:55
+-- Dump completed on 2019-04-24 12:04:11

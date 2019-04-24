@@ -74,7 +74,7 @@ function mqtt_messsageReceived(topic, message, packet)
 {
 	if (topic != "estadoPorta") {
 		
-		console.log('Topic=' +  topic + '  Message=' + message + '  Packet=' + packet);
+		console.log('Topic=' +  topic + '  Message=' + message);
 		
 		
 		if (topic == "acessoEntrada") {
@@ -116,29 +116,45 @@ function comandoCatraca(topic, message){
 	
 	connection.query(sql, function (error, results) {
 		
-		if (!error) {
-			
-			var sqlb = 	" SELECT d.desname, d.desemailnotice, a.data, a.desmessage "+
-						" FROM tb_registrygate a "+
-						" LEFT JOIN tb_action b ON a.iaction = b.id "+
-						" LEFT JOIN tb_gate c ON a.gate = c.id "+
-						" LEFT JOIN  tb_student d ON a.student = d.id "+
-						" WHERE a.id = (SELECT MAX(e.id) FROM tb_registrygate e) and d.desid2 = (?)";
-			var paramsb = [message];	
-			sqlb = mysql.format(sqlb, paramsb)
-			
-						
-			connection.query(sqlb, function (errorb, resultsb) {
 				
-				publishGate(topic, resultsb[0].desmessage);
-			
-			});				
+		console.log('Topic=' +  topic + '  Message=' + 'Passo na Procedure save');
+		
+			if (!error) {
+				
 
-			
-		}else{
-			throw error;
-			
-		}
+					
+					var sqlb = 	" SELECT d.desname, d.desemailnotice, a.data, a.desmessage "+
+								" FROM tb_registrygate a "+
+								" LEFT JOIN tb_action b ON a.iaction = b.id "+
+								" LEFT JOIN tb_gate c ON a.gate = c.id "+
+								" LEFT JOIN  tb_student d ON a.student = d.id "+
+								" WHERE a.id = (SELECT MAX(e.id) FROM tb_registrygate e) and d.desid2 = (?)";
+					var paramsb = [message];	
+					sqlb = mysql.format(sqlb, paramsb)				
+								
+					connection.query(sqlb, function (errorb, resultsb) {					
+						
+						console.log('Topic=' +  topic + '  Message=' + resultsb.length);
+						
+						if (resultsb.length > 0)
+						{
+							publishGate(topic, resultsb[0].desmessage);
+							
+						}else{
+							
+							publishGate(topic, "ACESSONEGADO/Nao Vinculado");
+							
+						}
+							
+					
+					});					
+					
+
+				
+			}else{
+				throw error;
+				
+			}
 		
 	});		
 }
@@ -147,16 +163,12 @@ function comandoCatraca(topic, message){
 ////////////////////////////////////////////////////
 ///////////////// Publicacao MQTT //////////////////
 ////////////////////////////////////////////////////
-var mqtt_send = require('mqtt');
-var client_send = mqtt_send.connect('mqtt://mybly.ddns.net');
+/*var mqtt_send = require('mqtt');
+var client_send = mqtt_send.connect('mqtt://mybly.ddns.net');*/
 
 function publishGate(topicEntrada, messageRetorno){
 	
-	client_send.on('connect', function () {
+	client.publish('retornoEntrada', messageRetorno);
 		
-	  //client_send.publish('retornoEntrada', messageRetorno)
-	  client_send.publish('retornoEntrada', 'ENTRANDO/Leno')
-	  
-	});	
 }
 
