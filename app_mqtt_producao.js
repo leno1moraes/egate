@@ -139,6 +139,16 @@ function comandoCatraca(topic, message){
 						if (resultsb.length > 0)
 						{
 							publishGate(topic, resultsb[0].desmessage);
+							publishOpenLock(topic, 'ABRE/'.concat(resultsb[0].desname));
+														
+							resultadomsg = "";
+							
+							if (resultsb[0].desmessage.substring(0,6) === "SAINDO") 
+								resultadomsg = "SAIDA";
+							else
+								resultadomsg = "ENTRADA";
+																			
+							enviarEmailREsponsavel(resultsb[0].desname, resultsb[0].desemailnotice, resultsb[0].data, resultadomsg);
 							
 						}else{
 							
@@ -170,5 +180,47 @@ function publishGate(topicEntrada, messageRetorno){
 	
 	client.publish('retornoEntrada', messageRetorno);
 		
+}
+
+function publishOpenLock(topicLock, messageRetorno){
+	
+	client.publish('retornoEntrada', messageRetorno);
+		
+}
+
+
+////////////////////////////////////////////////////
+////////////////// ENVIAR E-MAIL ///////////////////
+////////////////////////////////////////////////////
+function enviarEmailREsponsavel(pdesname, pdesemailnotice, pdata, pdesmessage){
+	
+	var request = require('request');
+
+	// Set the headers
+	var headers = {
+		'User-Agent':'Super Agent/0.0.1',
+		'Content-Type':'application/x-www-form-urlencoded'
+	}
+
+	// Configure the request
+	var options = {
+		url: 'http://egate.com/emailsentserver.php'
+		,method: 'GET'
+		,headers: headers
+		,qs: {'status': pdesmessage, 'estudante': pdesname, 'datareg': pdata, 'emailnotice': pdesemailnotice}
+	}
+
+	// Start the request
+	request(options, function (error, response, body) {
+		
+		if (!error && response.statusCode == 200) {
+			console.log("Sent e-mail Sucess");
+			
+		}else{
+			console.log("Fail e-mail");
+			
+		}
+	});
+	
 }
 

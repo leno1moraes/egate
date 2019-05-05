@@ -197,12 +197,12 @@ desired effect
       <ul class="sidebar-menu">
         <li class="header">Início</li>
 
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="/admin/users"><i class="fa fa-user"></i> <span>Cadastrar Usuário</span></a></li>
+        <!-- Optionally, you can add icons to the links -->        
         <li class="active"><a href="/admin/students"><i class="fa fa-users"></i> <span>Cadastrar Aluno</span></a></li>                  
         <li class="active"><a href="/admin/log"><i class="fa fa-list-alt"></i> <span>Log</span></a></li>   
         <li class="active"><a href="/admin/painelcontrol"><i class="fa fa-ticket"></i> <span>Visor de Fluxo</span></a></li> 
         <li class="active"><a href="/admin/painelcontroltag"><i class="fa fa-tag"></i> <span>Tabelas de Tags</span></a></li> 
+        <li class="active"><a href="/admin/users"><i class="fa fa-user"></i> <span>Cadastrar Usuário</span></a></li>
         <!--
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
